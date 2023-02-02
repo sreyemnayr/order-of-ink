@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+@font-face {
+  font-family: 'Alternate Gothic';
+  src: url(./fonts/Alternate Gothic No3 D Regular.otf) format('opentype');
+}
