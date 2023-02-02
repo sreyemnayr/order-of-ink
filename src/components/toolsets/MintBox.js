@@ -4,7 +4,7 @@ import QuantitySelectorSmall from './QuantitySelectorSmall'
 
 function MintBox() {
 
-    const Artists = ['Architex', 'Esteban', 'Neat Art', 'Johanna', 'Esteban', 'Architex', 'Esteban', 'Neat Art', 'Johanna', 'Esteban', 'Architex', 'Esteban', 'Neat Art', 'Johanna', 'Esteban']
+    const Artists = ['FABIO', 'AMAIA', 'SZYMON', 'MERRY', 'BRADLEY', 'JOHANNA', 'YAIZA', 'VULZ', 'NEAT ART', 'FLOR', 'ARCHITEX', 'ANINHA', 'ESTEBAN', 'KATUSZA']
 
     return (
         <FullBox>
