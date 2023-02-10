@@ -1,18 +1,51 @@
 import styled from 'styled-components'
 import React, {useState} from 'react'
 import MintBox from '../toolsets/MintBox'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import MintBoxMobile from '../toolsets/MintBoxMobile'
 
-function TierThreeLayout({extended}) {
+
+function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, selectedImages, setSelectedImages, responsive}) {
 
     return (
-        <SessionLargeBox extended={extended}>
-            <StepThree>Step 3</StepThree>
-            <Mint>Mint</Mint>
-            <MintBox/>
-            <HelpMeMint>Help Me Mint</HelpMeMint>
-            <FAQ>See our FAQ section and our How to Mint page for more information</FAQ>
-
-        </SessionLargeBox>
+        <>
+            <Row>
+                <SubtitleCol>
+                    Step 3
+                </SubtitleCol>
+            </Row>
+            <br/>
+            <Row>
+                <BookYourSessionCol>
+                    Mint
+                </BookYourSessionCol>
+            </Row>
+            <br/>
+            
+            {(responsive) ? (
+                <MintBox selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
+            ) : (
+                <MintBoxMobile selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
+            )}
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Row>
+                <SubtitleCol className="flex justify-center">
+                    HELP ME MINT
+                </SubtitleCol>
+            </Row>
+            <br/>
+            <Row>
+                <BookYourSessionCol style={{fontSize: "14px", paddingBottom: "150px"}} className="flex justify-center">
+                    See our FAQ section and our How to Mint page for more information
+                </BookYourSessionCol>
+            </Row>
+        </>
     )
 }
 
@@ -20,25 +53,25 @@ export default TierThreeLayout
 
 
 
-const SessionLargeBox = styled.div`
-    top: ${props => props.extended ? "4813px" : "4527px"};
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 1050px;
-    height: 669px;
-    position: absolute;
-    
+const BookYourSessionCol = styled(Col)`
+
+    /* Subtitle */
+
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 150%;
+    /* identical to box height, or 48px */
+
+    text-transform: uppercase;
+
+    color: #EBEAEB;
 `
 
 
-const StepThree = styled.div`
-    position: absolute;
-    width: 106px;
-    height: 58px;
 
-    top: 0px;
-    left: 0px;
+const SubtitleCol = styled(Col)`
 
     font-family: 'Alternate Gothic';
     font-style: normal;
@@ -53,63 +86,4 @@ const StepThree = styled.div`
     color: #EBEAEB;
 `
 
-const Mint = styled.div`
 
-position: absolute;
-width: 522px;
-height: 68px;
-top: 58px;
-left: 0px;
-text-align: left;
-
-/* Subtitle */
-font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 32px;
-line-height: 150%;
-/* or 48px */
-text-transform: uppercase;
-
-color: #EBEAEB;
-`
-
-
-
-const HelpMeMint = styled.div`
-position: absolute;
-width: 287px;
-height: 76px;
-left: 384px;
-top: 843px;
-
-font-family: 'Alternate Gothic';
-font-style: normal;
-font-weight: 400;
-font-size: 63px;
-line-height: 76px;
-/* identical to box height */
-text-align: center;
-text-transform: uppercase;
-
-color: #EBEAEB;
-`
-
-const FAQ = styled.div`
-
-position: absolute;
-width: 1068px;
-height: 37px;
-left: 0px;
-top: 945px;
-
-font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-text-align: center;
-text-transform: uppercase;
-
-color: #FFFFFF;
-`

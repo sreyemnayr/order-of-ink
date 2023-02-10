@@ -7,13 +7,13 @@ import ImageOne from '../../images/Johanna 1.png'
 import ImageTwo from '../../images/Katusza 1.png'
 import ImageThree from '../../images/Merry 1.png'
 import ImageFour from '../../images/Merry 2.png'
-import TierOneLayout from '../../components/layouts/TierOneLayout'
-import TierTwoLayout from '../../components/layouts/TierTwoLayout'
-import TierThreeLayout from '../../components/layouts/TierThreeLayout'
+import TierOneLayout from '../layouts/TierOneLayout'
+import TierTwoLayout from '../layouts/TierTwoLayout'
+import TierThreeLayout from '../layouts/TierThreeLayout'
 
 
 
-function HomeMobile() {
+function HomeAbsolute() {
 
     const [extended, setExtended] = useState(false)
 
@@ -58,7 +58,7 @@ function HomeMobile() {
     )
 }
 
-export default HomeMobile
+export default HomeAbsolute
 
 const HeaderImage = styled.img`
     position: absolute;
@@ -99,6 +99,14 @@ const NavButton = styled.button`
     z-index: 1;
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:hover {
+        color: grey;
+    }
 `
 
 const ConnectWallet = styled.button`

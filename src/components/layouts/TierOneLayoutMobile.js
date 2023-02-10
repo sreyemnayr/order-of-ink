@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 
-function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, reponsive}) {
+function TierOneLayoutMobile({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
 
     const [firstSecondIncluded, setFirstSecondIncluded] = useState(false)
     const [thirdIncluded, setThirdIncluded] = useState(false)
@@ -77,12 +77,13 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                             </SessionSubText>
                       
-                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                            <SessionButton firstSecondIncluded={firstSecondIncluded} thirdIncluded={thirdIncluded} onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
                 
                         </div>
                         {firstSecondIncluded && 
                         <div className="flex justify-center">
-                        <div className="w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
+                        <div className="w-full flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
+                            <div style={{color: "white",  marginLeft: "-10px",fontFamily: "Work Sans"}}>FIRST SESSION</div>
                             <ul style={{listStyleType: 'disc'}}>
                                 <Line>
                                 Genesis Collection Order of Ink digital collectible
@@ -97,17 +98,15 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <Line>Limited NFT Giveaways and airdrops</Line>
                 
                             </ul>
-                            <br/>
+                            
                             <div style={{color: "white", fontFamily: "Work Sans"}}>IRL:</div>
                             <ul style={{listStyleType: "disc"}}>
                                 <Line>
                                 Access to The Order private community for digital and IRL events
                                 </Line>
                             </ul>
-                            
-
-                            </div>
-                            <div className="w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px" }}>
+                            <br/>
+                            <div style={{color: "white", marginLeft: "-10px", fontFamily: "Work Sans"}}>SECOND SESSION</div>
                             <ul style={{listStyleType: 'disc'}}>
                                 <Line>
                                 Genesis Collection Order of Ink digital collectible
@@ -123,7 +122,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 
                 
                             </ul>
-                            <br/>
+     
                             <div style={{color: "white", fontFamily: "Work Sans"}}>IRL:</div>
                             <ul style={{listStyleType: "disc"}}>
                                 <Line>
@@ -137,7 +136,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                             </div>}
                     </SessionCardOne>
                 </div>
-                <div className="sm:w-full md:w-1/3 px-2">
+                <div className="sm:w-full md:w-1/3 px-2 mt-4">
                     <SessionCardTwo thirdIncluded={thirdIncluded}>
                         <div className="flex">
                             <div className="w-full flex flex-col justify-center">
@@ -150,7 +149,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                                 </SessionSubText>
-                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                                <SessionButton firstSecondIncluded={firstSecondIncluded} thirdIncluded={thirdIncluded} onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
                             </div>
                         </div>
                         {thirdIncluded && 
@@ -198,7 +197,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
     )
 }
 
-export default TierOneLayout
+export default TierOneLayoutMobile
 
 const TitleCol = styled(Col)`
 
@@ -260,7 +259,7 @@ color: #FFFFFF;
 
 const SessionCardOne = styled(Card)`
 background: ${props => props.firstSecondIncluded ? 
-    'linear-gradient(to bottom, #1E1E1E 60%, #333333 40%)' : 
+    'linear-gradient(to bottom, #1E1E1E 40%, #333333 60%)' : 
     '#1E1E1E'};
 border-radius: 5px;
 
@@ -269,7 +268,7 @@ border: ${props => props.firstSecondIncluded ? '1px solid white' : 'none'};
 
 const SessionCardTwo = styled(Card)`
 background: ${props => props.thirdIncluded ? 
-    'linear-gradient(to bottom, #1E1E1E 60%, #333333 40%)' : 
+    'linear-gradient(to bottom, #1E1E1E 62%, #333333 38%)' : 
     '#1E1E1E'};
 border-radius: 5px;
 
@@ -296,6 +295,9 @@ font-weight: 400;
 font-size: 32px;
 line-height: 38px;
 text-transform: uppercase;
+
+text-decoration: ${props => props.thirdIncluded ? 'underline' : 'none'}
+text-decoration: ${props => props.firstSecondIncluded ? 'underline' : 'none'}
 
 background: none;
 border: none;

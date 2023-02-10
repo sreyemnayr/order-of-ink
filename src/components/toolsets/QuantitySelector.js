@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'; 
 
-function QuantitySelector() {
+function QuantitySelector({quantity, setQuantity}) {
 
-    const [quantity, setQuantity] = useState(0)
 
     return (
         <SelectorBox>

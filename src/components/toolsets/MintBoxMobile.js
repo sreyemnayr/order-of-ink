@@ -6,8 +6,9 @@ import Row from 'react-bootstrap/Row'
 import { getCombinedArtists } from '../utils/getCombinedArtists'
 import react, {useState, useEffect} from 'react'
 import { getTotalPrice } from '../utils/getTotalPrice'
+import QuantitySelectorMobile from './QuantitySelectorMobile'
 
-function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
+function MintBoxMobile({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
 
@@ -40,34 +41,34 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                     <ExampleImage src={MintBoxExample}/>
                     <div className="grid grid-rows-3 grid-cols-2 flex">
                         
-                        <div style={{fontSize: "48px"}} className="flex justify-center col-span-2">
+                        <div style={{fontSize: "48px"}} className="flex justify-center col-span-2 py-4">
                             Mint Details
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px", whiteSpace:"nowrap"}}>
                             FIRST/SECOND SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.08 ETH</p>
                         </div>
-                        <div className="flex justify-end">
-                            <QuantitySelectorSmall quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
+                        <div className="flex justify-end mr-2">
+                            <QuantitySelectorMobile quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px"}}>
                             FINAL SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.4 ETH</p>
                         </div>
-                        <div className="flex justify-end">
-                            <QuantitySelectorSmall quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
+                        <div className="flex justify-end mr-2">
+                            <QuantitySelectorMobile quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px"}}>
                             ARTISTS
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px"}}>
                             
                         </div>
                         <div className="flex justify-center col-span-2">
-                            <div className="grid grid-rows-3 grid-cols-5 flex">
+                            <div className="grid grid-rows-5 grid-cols-3">
                             {combinedArtists.map((artist) => {
                                 return (
-                                    <div>
+                                    <div className="-mt-2">
                                     {(selectedImages.includes(artist.id)) ?
                                     (<ArtistButtonSelected onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButtonSelected>) : 
                                     (<ArtistButton onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButton>)}
@@ -78,14 +79,14 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             </div>
                         </div>
                         <br/>
-                        <div className="flex justify-center col-span-2">
+                        <div className="flex justify-center col-span-2 mt-4">
                             <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL</p>
                         </div>
-                        <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
+                        <div style={{fontSize: "64px"}} className="flex justify-center col-span-2 my-4">
                             <p>{getTotalPrice(firstSecondQuantity, thirdQuantity)} ETH</p>
                         </div>
                         <br/>
-                        <div className="flex justify-center col-span-2">
+                        <div className="flex justify-center col-span-2 py-8">
                             <MintButton>Mint</MintButton>
                         </div>
                         
@@ -103,7 +104,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
     )
 }
 
-export default MintBox;
+export default MintBoxMobile;
 
 
 const SubSubtitleCol = styled(Col)`
@@ -128,7 +129,7 @@ background: #111111;
 border: none;
 border-radius: 5px;
 height: 21px;
-width: 81px;
+width: 118px;
 margin: 3px;
 
 font-family: 'Work Sans';
@@ -148,7 +149,7 @@ background: #111111;
 border: 1px solid white;
 border-radius: 5px;
 height: 21px;
-width: 81px;
+width: 118px;
 margin: 3px;
 
 font-family: 'Work Sans';
@@ -165,7 +166,7 @@ color: #FFFFFF;
 
 const FullBox = styled.div`
 
-padding: 2rem;
+width: 100%;
 
 
 background: #333333;
@@ -174,8 +175,8 @@ background: #333333;
 
 const ExampleImage = styled.img`
 border-radius: 5px;
-height: 517px;
-width: 517px;
+height: 320px;
+width: 100%;
 `
 
 

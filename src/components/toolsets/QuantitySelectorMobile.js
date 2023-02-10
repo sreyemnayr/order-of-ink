@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'; 
 
-function QuantitySelectorSmall({quantity, setQuantity}) {
+function QuantitySelectorMobile({quantity, setQuantity}) {
 
     return (
-        <SelectorBox>
+        <SelectorBox >
             <SubtractButton onClick={()=>setQuantity(quantity-1)}/>
             <QuantityDisplay>{quantity}</QuantityDisplay>
             <AddButton onClick={()=>setQuantity(quantity+1)}>+</AddButton>
@@ -14,18 +14,18 @@ function QuantitySelectorSmall({quantity, setQuantity}) {
 
 }
 
-export default QuantitySelectorSmall
+export default QuantitySelectorMobile
 
 const SelectorBox = styled.div`
 height: 45px;
-width: 218px;
+width: 150px;
 display: flex;
 align-items: center;
 `
 
 const SubtractButton = styled.button`
     height: 34px;
-    width: 42px;
+    width: 34px;
     display: inline-flex; 
     align-items: center;
     justify-content: center;
@@ -47,18 +47,18 @@ const AddButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
+    width: 34px;
     height: 34px;
     border-radius: 20px;
     background-color: transparent;
     border: 1px solid white;
-    font-size: 36px;
+    font-size: 40px;
     cursor: pointer;
     color: #D9D9D9;
 `
 
 const QuantityDisplay = styled.div`
-  width: 176px;
+  width: 73px;
   height: 45px;
   display: flex;
   align-items: center;

@@ -12,7 +12,7 @@ import { getCombinedArtists } from '../utils/getCombinedArtists'
 
 
 
-function TierTwoLayout({selectedImages, setSelectedImages, responsive}) {
+function TierTwoLayoutMobile({selectedImages, setSelectedImages, responsive}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
 
@@ -52,45 +52,21 @@ function TierTwoLayout({selectedImages, setSelectedImages, responsive}) {
         setSelectedImages(randomButtons);
       };
 
-    const ImageButton = ({ image, id, onClick, selected }) => {
-        return (
-          <div
-            onClick={() => onClick(id)}
-            style={{
-              border: selected ? '1px solid white' : 'none',
-              borderRadius: '5px',
-              width:  '257px',
-              height: '257px',
-              display: 'inline-block',
-              backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              cursor: 'pointer',
-       
-              
-            
-              boxSizing: "border-box"
-            }}
-          />
-        );
-        }
-        const ImageButtonMobile = ({ image, id, onClick, selected }) => {
+        const ImageButton = ({ image, id, onClick, selected }) => {
             return (
               <div
                 onClick={() => onClick(id)}
                 style={{
                   border: selected ? '1px solid white' : 'none',
                   borderRadius: '5px',
-                  width:  '157px',
-                  height: '157px',
-                  display: 'inline-block',
+                  width:  '192px',
+                  height: '192px',
+                  
                   backgroundImage: `url(${image})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   cursor: 'pointer',
-           
-                  
-                
+         
                   boxSizing: "border-box"
                 }}
               />
@@ -128,9 +104,8 @@ function TierTwoLayout({selectedImages, setSelectedImages, responsive}) {
             <SubSubtitleCol className="flex justify-center">Select 3-5 artists below to mint their work.*</SubSubtitleCol>
             <br/>
             <br/>
-            {(responsive) ? (
-                <div className="w-full flex flex-col justify-center items-center" >
-                <div className="grid grid-rows-5 grid-cols-4 gap-2">
+            <div className="w-full" >
+                <div className="grid grid-rows-9 grid-cols-2 justify-center gap-y-2 -gap-x-1">
                 {combinedArtists.map((artist) => {
                         return (
                         <ImageButton image={artist.image}
@@ -139,36 +114,15 @@ function TierTwoLayout({selectedImages, setSelectedImages, responsive}) {
                         selected={selectedImages.includes(artist.id)}/>
                         )
                     })}
-                <div className="col-span-2 row-span-1 flex items-center justify-center h-257">
+                <div className="col-span-2 row-span-1 flex items-center justify-center mt-5">
                     
                     <SurpriseMe onClick={() => handleRandom()}>SURPRISE ME!</SurpriseMe>
                     
                     {/* <SelectForMe>Select Artist For Me</SelectForMe> */}
                 </div>
-                <Disclaimer className="col-span-4 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
+                <Disclaimer className="col-span-2 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
                 </div>
             </div>
-            ) : (
-                <div className="w-full flex" >
-                <div className="grid grid-rows-9 grid-cols-2 gap-2">
-                {combinedArtists.map((artist) => {
-                        return (
-                        <ImageButtonMobile image={artist.image}
-                        id={artist.id}
-                        onClick={handleImageClick}
-                        selected={selectedImages.includes(artist.id)}/>
-                        )
-                    })}
-                <div className="col-span-2 row-span-1 flex items-center justify-center h-257">
-                    
-                    <SurpriseMe onClick={() => handleRandom()}>SURPRISE ME!</SurpriseMe>
-                    
-                    {/* <SelectForMe>Select Artist For Me</SelectForMe> */}
-                </div>
-                <Disclaimer className="col-span-4 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
-                </div>
-            </div>
-            )}
             
             
 
@@ -176,7 +130,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, responsive}) {
     )
 }
 
-export default TierTwoLayout
+export default TierTwoLayoutMobile
 
 // 3026px
 
@@ -283,8 +237,7 @@ color: #FFFFFF;
 `
 
 const Disclaimer = styled.div`
-width: 1050px;
-height: 26px;
+
 
 
 /* Body text */
