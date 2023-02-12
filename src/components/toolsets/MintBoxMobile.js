@@ -175,7 +175,7 @@ background: #333333;
 
 const ExampleImage = styled.img`
 border-radius: 5px;
-height: 320px;
+height: 418px;
 width: 100%;
 `
 

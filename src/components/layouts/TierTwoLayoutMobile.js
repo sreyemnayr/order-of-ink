@@ -12,7 +12,7 @@ import { getCombinedArtists } from '../utils/getCombinedArtists'
 
 
 
-function TierTwoLayoutMobile({selectedImages, setSelectedImages, responsive}) {
+function TierTwoLayoutMobile({selectedImages, setSelectedImages, soldOutImages}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
 
@@ -52,7 +52,7 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, responsive}) {
         setSelectedImages(randomButtons);
       };
 
-        const ImageButton = ({ image, id, onClick, selected }) => {
+        const ImageButtonMobile = ({ image, id, onClick, selected, soldOut }) => {
             return (
               <div
                 onClick={() => onClick(id)}
@@ -69,7 +69,11 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, responsive}) {
          
                   boxSizing: "border-box"
                 }}
-              />
+              >
+                  {soldOut && <div class="w-full h-full flex justify-center items-center backdrop-brightness-50">
+                        <span class="text-white text-2xl w-1/2 text-center" style={{fontFamily: "Alternate Gothic"}}>SOLD OUT</span>
+                </div>}
+              </div>
             );
     }
 
@@ -108,10 +112,11 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, responsive}) {
                 <div className="grid grid-rows-9 grid-cols-2 justify-center gap-y-2 -gap-x-1">
                 {combinedArtists.map((artist) => {
                         return (
-                        <ImageButton image={artist.image}
+                        <ImageButtonMobile image={artist.image}
                         id={artist.id}
                         onClick={handleImageClick}
-                        selected={selectedImages.includes(artist.id)}/>
+                        selected={selectedImages.includes(artist.id)}
+                        soldOut={soldOutImages.includes(artist.id)}/>
                         )
                     })}
                 <div className="col-span-2 row-span-1 flex items-center justify-center mt-5">

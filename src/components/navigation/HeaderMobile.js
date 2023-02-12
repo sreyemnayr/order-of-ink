@@ -1,6 +1,8 @@
 import OrderOfInkHeader from '../../images/The-order-of-Ink_Mint-Page_Header.png'
 import styled from 'styled-components'
 import {useState} from 'react'
+import iglogo from '../../images/iglogo.png'
+import twitterlogo from '../../images/twitterlogo.png'
 
 function HeaderMobile() {
     const [showNav, setShowNav] = useState(false);
@@ -22,13 +24,17 @@ function HeaderMobile() {
         </HeaderContainer>
         {showNav && (
             <NavModal className="z-50 bg-black">
-                <ModalContainer className="flex flex-col items-center bg-black mt-80">
-                    <CloseButton className="cursor-pointer text-white px-4" onClick={() => setShowNav(false)}>&times;</CloseButton>
+                <ModalContainer className="flex flex-col items-center justify-center bg-black mt-40">
+                    <CloseButton className="cursor-pointer text-white px-4 py-3" onClick={() => setShowNav(false)}>&times;</CloseButton>
                     <NavButton>Home</NavButton>
                     <NavButton>About</NavButton>
                     <NavButton>Thinkmap</NavButton>
                     <NavButton>Partners</NavButton>
                     <NavButton>Team</NavButton>
+                    <div className="mt-16" style={{whiteSpace: "nowrap"}}>
+                        <SocialIcon src={iglogo}/>
+                        <SocialIcon src={twitterlogo}/>
+                    </div>
                 </ModalContainer>
             </NavModal>
         )}
@@ -84,7 +90,7 @@ const CloseButton = styled.button`
 const NavButton = styled.button`
     font-family: 'Work Sans';
     color: white;
-    font-size: 16px;
+    font-size: 44px;
     z-index: 1;
     background-color: transparent;
     border: none;
@@ -116,3 +122,11 @@ const SneakPeak = styled.div`
   color: #FFFFFF;
   paddingBottom: -10px;
 `;
+
+const SocialIcon = styled.img`
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    margin: 12px;
+
+`
