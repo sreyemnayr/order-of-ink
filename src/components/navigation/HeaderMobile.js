@@ -26,14 +26,14 @@ function HeaderMobile() {
             <NavModal className="z-50 bg-black">
                 <ModalContainer className="flex flex-col items-center justify-center bg-black mt-40">
                     <CloseButton className="cursor-pointer text-white px-4 py-3" onClick={() => setShowNav(false)}>&times;</CloseButton>
-                    <NavButton>Home</NavButton>
-                    <NavButton>About</NavButton>
-                    <NavButton>Thinkmap</NavButton>
-                    <NavButton>Partners</NavButton>
-                    <NavButton>Team</NavButton>
+                    <NavButton href="https://www.theorderofink.com">Home</NavButton>
+                    <NavButton href="https://www.theorderofink.com/#ourvalues">About</NavButton>
+                    <NavButton href="https://www.theorderofink.com/#thinkmap">Thinkmap</NavButton>
+                    <NavButton href="https://www.theorderofink.com/#partners">Partners</NavButton>
+                    <NavButton href="https://www.theorderofink.com/#team">Team</NavButton>
                     <div className="mt-16" style={{whiteSpace: "nowrap"}}>
-                        <SocialIcon src={iglogo}/>
-                        <SocialIcon src={twitterlogo}/>
+                        <a href="https://www.instagram.com/theorderofink/"><SocialIcon src={iglogo}/></a>
+                        <a href="https://twitter.com/TheOrderofInk"><SocialIcon src={twitterlogo}/></a>
                     </div>
                 </ModalContainer>
             </NavModal>
@@ -87,7 +87,7 @@ const CloseButton = styled.button`
     font-size: 2rem;
 `
 
-const NavButton = styled.button`
+const NavButton = styled.a`
     font-family: 'Work Sans';
     color: white;
     font-size: 44px;

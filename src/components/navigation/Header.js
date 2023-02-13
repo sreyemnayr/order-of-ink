@@ -5,11 +5,11 @@ function Header() {
     return (
         <div style={{backgroundImage: `url(${OrderOfInkHeader})`}} className="relative bg-cover bg-center h-screen">
             <nav className="py-12 px-14 md:flex-row md:space-x-6">
-                <NavButton>Home</NavButton>
-                <NavButton>About</NavButton>
-                <NavButton>Thinkmap</NavButton>
-                <NavButton>Partners</NavButton>
-                <NavButton>Team</NavButton>
+                <NavButton href="https://www.theorderofink.com">Home</NavButton>
+                <NavButton href="https://www.theorderofink.com/#ourvalues">About</NavButton>
+                <NavButton href="https://www.theorderofink.com/#thinkmap">Thinkmap</NavButton>
+                <NavButton href="https://www.theorderofink.com/#partners">Partners</NavButton>
+                <NavButton href="https://www.theorderofink.com/#team">Team</NavButton>
                 <ConnectWallet className="float-right">CONNECT WALLET</ConnectWallet>
             </nav>
             <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0 h-16 ...">Sneak Peek</SneakPeak>
