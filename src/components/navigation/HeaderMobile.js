@@ -97,6 +97,7 @@ const NavButton = styled.a`
     font-weight: bold;
     &:hover {
         color: grey;
+        text-decoration: underline;
     }
 `
 
