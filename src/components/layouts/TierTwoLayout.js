@@ -121,9 +121,11 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
                         soldOut={soldOutImages.includes(artist.id)}/>
                         )
                     })}
-                <div className="col-span-2 row-span-1 flex items-center justify-center h-257">
-                    
+                <div className="col-span-2 row-span-1 flex items-center justify-center mt-6 h-257">
+                    <div className="grid grid-rows-2 grid-cols-1">
                     <SurpriseMe onClick={() => handleRandom()}>SURPRISE ME!</SurpriseMe>
+                    <SelectForMe className="flex justify-center py-3">Select Artist for Me</SelectForMe>
+                    </div>
                     
                     {/* <SelectForMe>Select Artist For Me</SelectForMe> */}
                 </div>
@@ -227,6 +229,19 @@ color: #FFFFFF;
 
 `
 
+
+const SelectForMe = styled.div`
+
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+
+text-transform: uppercase;
+
+color: #FFFFFF;
+`
 
 const Disclaimer = styled.div`
 width: 1050px;

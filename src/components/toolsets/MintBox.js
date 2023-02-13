@@ -78,14 +78,14 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             </div>
                         </div>
                         <br/>
-                        <div className="flex justify-center col-span-2">
+                        <div className="flex justify-center col-span-2 pt-4">
                             <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL</p>
                         </div>
                         <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
                             <p>{getTotalPrice(firstSecondQuantity, thirdQuantity)} ETH</p>
                         </div>
                         <br/>
-                        <div className="flex justify-center col-span-2">
+                        <div className="flex justify-center col-span-2 pt-8">
                             <MintButton>Mint</MintButton>
                         </div>
                         

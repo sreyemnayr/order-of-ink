@@ -44,14 +44,14 @@ function MintBoxMobile({selectedImages, setSelectedImages, firstSecondQuantity, 
                         <div style={{fontSize: "48px"}} className="flex justify-center col-span-2 py-4">
                             Mint Details
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px", whiteSpace:"nowrap"}}>
+                        <div style={{fontSize: "24px", paddingLeft: "1rem", marginTop: "-5px", whiteSpace:"nowrap"}}>
                             FIRST/SECOND SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.08 ETH</p>
                         </div>
                         <div className="flex justify-end mr-2">
                             <QuantitySelectorMobile quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "1rem", marginTop: "-5px"}}>
+                        <div style={{fontSize: "24px", paddingLeft: "1rem", marginTop: "-5px"}}>
                             FINAL SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.4 ETH</p>
                         </div>

@@ -77,7 +77,7 @@ function TierOneLayoutMobile({firstSecondQuantity, setFirstSecondQuantity, third
                                 <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                             </SessionSubText>
                       
-                            <SessionButton firstSecondIncluded={firstSecondIncluded} thirdIncluded={thirdIncluded} onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                            <SessionButton firstSecondIncluded={firstSecondIncluded} onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
                 
                         </div>
                         {firstSecondIncluded && 
@@ -149,7 +149,7 @@ function TierOneLayoutMobile({firstSecondQuantity, setFirstSecondQuantity, third
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                                 </SessionSubText>
-                                <SessionButton firstSecondIncluded={firstSecondIncluded} thirdIncluded={thirdIncluded} onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                                <SessionButton thirdIncluded={thirdIncluded} onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
                             </div>
                         </div>
                         {thirdIncluded && 
@@ -295,12 +295,10 @@ font-weight: 400;
 font-size: 32px;
 line-height: 38px;
 text-transform: uppercase;
-
-text-decoration: ${props => props.thirdIncluded ? 'underline' : 'none'}
-text-decoration: ${props => props.firstSecondIncluded ? 'underline' : 'none'}
+border: none;
 
 background: none;
-border: none;
+
 
 color: #FFFFFF;
 `

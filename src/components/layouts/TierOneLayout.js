@@ -11,6 +11,7 @@ import Card from 'react-bootstrap/Card'
 
 function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, reponsive}) {
 
+    //Local states to determine whether a "What's Included" button is clicked, opening up extra content for the user.
     const [firstSecondIncluded, setFirstSecondIncluded] = useState(false)
     const [thirdIncluded, setThirdIncluded] = useState(false)
 
@@ -77,9 +78,14 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                             </SessionSubText>
                       
-                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7" firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
                 
                         </div>
+
+
+
+
+                        {/* Whats included content */}
                         {firstSecondIncluded && 
                         <div className="flex justify-center">
                         <div className="w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
@@ -135,6 +141,12 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                             </ul>
                             </div>
                             </div>}
+
+
+
+
+
+
                     </SessionCardOne>
                 </div>
                 <div className="sm:w-full md:w-1/3 px-2">
@@ -150,9 +162,15 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                                 </SessionSubText>
-                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7">What's Included?</SessionButton>
+                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7" thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
                             </div>
                         </div>
+
+
+
+
+
+                        {/* Whats included content */}
                         {thirdIncluded && 
                         <div className="flex justify-center">
                         <div className="w-full flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
@@ -186,6 +204,11 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                             </div>
                             
                             </div>}
+
+
+
+
+
                     </SessionCardTwo>
                 </div>
             </div>
@@ -296,9 +319,10 @@ font-weight: 400;
 font-size: 32px;
 line-height: 38px;
 text-transform: uppercase;
+border: none;
 
 background: none;
-border: none;
+
 
 color: #FFFFFF;
 `

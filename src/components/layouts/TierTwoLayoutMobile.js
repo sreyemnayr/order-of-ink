@@ -109,7 +109,7 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, soldOutImages})
             <br/>
             <br/>
             <div className="w-full" >
-                <div className="grid grid-rows-9 grid-cols-2 justify-center gap-y-2 -gap-x-1">
+                <div className="grid grid-rows-9 grid-cols-2 justify-center flex gap-2">
                 {combinedArtists.map((artist) => {
                         return (
                         <ImageButtonMobile image={artist.image}
@@ -119,10 +119,12 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, soldOutImages})
                         soldOut={soldOutImages.includes(artist.id)}/>
                         )
                     })}
-                <div className="col-span-2 row-span-1 flex items-center justify-center mt-5">
-                    
+                <div className="col-span-2 row-span-1 flex items-center justify-center mt-7">
+                    <div className="grid grid-rows-2 grid-cols-1">
                     <SurpriseMe onClick={() => handleRandom()}>SURPRISE ME!</SurpriseMe>
+                    <SelectForMe className="flex justify-center py-2">Select Artist for Me</SelectForMe>
                     
+                    </div>
                     {/* <SelectForMe>Select Artist For Me</SelectForMe> */}
                 </div>
                 <Disclaimer className="col-span-2 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
@@ -204,7 +206,7 @@ color: #FFFFFF;
 
 
 const SurpriseMe = styled.button`
-width: 264px;
+width: 346px;
 height: 64px;
 
 
@@ -225,10 +227,7 @@ color: #FFFFFF;
 
 `
 
-const SelectForMe = styled.p`
-
-width: 521px;
-height: 26px;
+const SelectForMe = styled.div`
 
 font-family: 'Work Sans';
 font-style: normal;

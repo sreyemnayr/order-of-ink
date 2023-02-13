@@ -1,33 +1,52 @@
-import OrderOfInkHeader from '../../images/The-order-of-Ink_Mint-Page_Header.png'
+import OrderOfInkFooter from '../../images/orderofinkfooter.gif'
 import styled from 'styled-components'
+import Container from 'react-bootstrap/Container'
+import iglogo from '../../images/iglogo.png'
+import twitterlogo from '../../images/twitterlogo.png'
 
 function Footer() {
+
+    const EmailInput = () => {
+        return (
+          <div className="flex items-start -mt-16 gap-x-2">
+            <input
+              type="email"
+              className="w-64 p-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email address"
+            />
+            <button className="p-4 bg-slate-300 text-black font-medium hover:bg-slate-200 focus:outline-none">
+              <span className="flex items-center justify-center h-full">GET UPDATES</span>
+            </button>
+          </div>
+        );
+      }
+
+      
     return (
-        <div style={{backgroundImage: `url(${OrderOfInkHeader})`}} className="relative bg-cover bg-center h-screen">
-            <nav className="py-12 px-14 md:flex-row md:space-x-6">
-                <NavButton>Home</NavButton>
-                <NavButton>About</NavButton>
-                <NavButton>Thinkmap</NavButton>
-                <NavButton>Partners</NavButton>
-                <NavButton>Team</NavButton>
-                <ConnectWallet className="float-right">CONNECT WALLET</ConnectWallet>
-            </nav>
-            <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0 h-16 ...">Sneak Peek</SneakPeak>
+        <div style={{backgroundImage: `linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url(${OrderOfInkFooter})`}} className="relative bg-cover bg-center backdrop-brightness-20">
+            <div className="grid grid-rows-1 grid-cols-2 mt-20 pt-16 mx-60">
+                <div className="grid grid-rows-5 grid-cols-1">
+                    <TattoosOfTheFuture className="py-4">Tattoos of the future</TattoosOfTheFuture>
+                    <FooterFont><div className="font-extrabold inline-block">Partnerships:</div><a className="inline-block px-2 font-grey underline" href='mailto:info@theorderofink.com?subject=Me&body=Hello!'>info@theorderofink.com</a></FooterFont>
+                    <EmailInput/>
+                    <FooterFont className="flex gap-x-4 -mt-20"><SocialIcon src={iglogo}/><SocialIcon src={twitterlogo}/></FooterFont>
+                    <FooterFont className="font-slate-400 underline -mt-4">&#9400; Copyright The Order of Ink 2022 - Website by JAX</FooterFont>
+                </div>
+                <div className="grid grid-rows-6 grid-cols-1 h-1/3 justify-items-start ml-80 my-8">
+                    <NavButton className="ml-40">About</NavButton>
+                    <NavButton className="ml-40">Collective</NavButton>
+                    <NavButton className="ml-40">Thinkmap</NavButton>
+                    <NavButton className="ml-40">Partners</NavButton>
+                    <NavButton className="ml-40">Team</NavButton>
+                    <NavButton className="ml-40">FAQ</NavButton>
+                </div>
+            </div>
         </div>
     )
 }
 
 export default Footer
 
-
-const HeaderImage = styled.img`
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    left: 0px;
-    top: 0px;
-
-`
 
 const NavButton = styled.button`
 
@@ -41,30 +60,32 @@ const NavButton = styled.button`
     &:hover {
         color: grey;
     }
-`
-
-const ConnectWallet = styled.button`
-    background: #333333;
-    border-radius: 5px;
-    font-family: Alternate Gothic;
-    color: white;
-    font-size: 32px;
-    z-index: 1;
-    line-height: 38px;
-    width: 264px;
-    height: 64px;
-    text-align: center;
-    cursor: pointer;
+    text-decoration: underline;
+    justify-content: start;
 `
 
 
-const SneakPeak = styled.div`
+const TattoosOfTheFuture = styled.div`
+font-family: 'Alternate Gothic';
+font-size: 48px;
 
-    font-family: 'Work Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    text-transform: uppercase;
+font-style: normal;
+font-weight: 400;
+color: white;
 
-    color: #FFFFFF;
+
+`
+
+const FooterFont = styled.div`
+font-family: 'Work Sans';
+color: white;
+font-size: 13px;
+white-space: nowrap;
+overflow-x: auto;
+`
+
+const SocialIcon = styled.img`
+height: 12%;
+width: 20px;
+display: inline-block;
 `

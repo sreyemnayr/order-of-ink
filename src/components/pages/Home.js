@@ -9,6 +9,7 @@ import TierThreeLayout from '../../components/layouts/TierThreeLayout';
 import Container from 'react-bootstrap/Container';
 import Header from '../../components/navigation/Header';
 import Footer from '../../components/navigation/Footer'
+import FooterMobile from '../../components/navigation/FooterMobile'
 import Carousel from '../layouts/CarouselLayout'
 import HeaderMobile from '../../components/navigation/HeaderMobile'
 import CarouselMobile from '../layouts/CarouselLayoutMobile';
@@ -64,6 +65,7 @@ const Home = () => {
                     <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
                     <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
                 </LargeContainer>
+                <Footer/>
             </PageLayout>
 
         ) : (
@@ -75,6 +77,7 @@ const Home = () => {
                     <TierTwoLayoutMobile selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
                     <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
                 </LargeContainerMobile>
+                <FooterMobile/>
             </PageLayoutMobile>
         )
     }
