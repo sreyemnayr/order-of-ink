@@ -1,4 +1,5 @@
 import OrderOfInkHeader from '../../images/The-order-of-Ink_Mint-Page_Header.png'
+import { CustomConnectButton } from '../toolsets/CustomConnectWalletButton'
 import styled from 'styled-components'
 
 function Header() {
@@ -10,7 +11,7 @@ function Header() {
                 <NavButton href="https://www.theorderofink.com/#thinkmap">Thinkmap</NavButton>
                 <NavButton href="https://www.theorderofink.com/#partners">Partners</NavButton>
                 <NavButton href="https://www.theorderofink.com/#team">Team</NavButton>
-                <ConnectWallet className="float-right">CONNECT WALLET</ConnectWallet>
+                <CustomConnectButton className="inline float-right" />
             </nav>
             <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0 h-16 ...">Sneak Peek</SneakPeak>
         </div>

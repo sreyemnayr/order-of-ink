@@ -65,7 +65,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 flex w-full gap-2 pl-[2rem]">
                             {combinedArtists.map((artist) => {
                                 return (
-                                    <ArtistButton className={`w-full p-1 bg-zinc-800 text-zinc-50 ring-1 ring-zinc-50 ${
+                                    <ArtistButton key={`artist_light_${artist.id}`} className={`w-full p-1 bg-zinc-800 text-zinc-50 ring-1 ring-zinc-50 ${
                                         selectedImages.includes(artist.id) ? 'opacity-100' : 'opacity-25'
                                     }`} onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButton>
                                     

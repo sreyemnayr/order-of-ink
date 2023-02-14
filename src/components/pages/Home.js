@@ -61,9 +61,9 @@ const Home = () => {
             {responsive.showTopNavMenu ? <Header/> : <HeaderMobile/>}
             <Carousel/>
             <LargeContainer>
-            <TierOneLayout firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
+            <TierOneLayout firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
             <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
-        <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
+        <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
         </LargeContainer>
         {responsive.showTopNavMenu ? <Footer/> : <FooterMobile/>}
     </PageLayout>

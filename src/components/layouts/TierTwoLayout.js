@@ -129,6 +129,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
                         return (
                         <ImageButton image={artist.image}
                         id={artist.id}
+                        key={`artist_picture_${artist.id}`}
                         onClick={handleImageClick}
                         selected={selectedImages.includes(artist.id)}
                         soldOut={soldOutImages.includes(artist.id)}/>
