@@ -80,8 +80,8 @@ background-color: black;
 
 
 const LargeContainer = styled(Container)`
-max-width: 1200px; 
+max-width: 900px; 
 margin: 3rem auto;
 padding: 1rem;
-width: 90vw;
+width: 80vw;
 `
