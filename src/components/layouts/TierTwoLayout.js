@@ -118,7 +118,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
             <br/>
             <br/>
             <SubSubtitleCol className="text-center justify-center">Select <span className={`
-            ${selectedImages.length > 5 ? 'underline decoration-dashed text-red-500' : ''}
+            ${selectedImages.length > 5 && selectedImages.length < 14 ? 'underline decoration-dashed text-red-500' : ''}
             ${selectedImages.length < 3 ? 'underline decoration-dashed text-amber-200' : ''}
             `}>3-5</span> artists below to mint their work.*</SubSubtitleCol>
             <br/>
