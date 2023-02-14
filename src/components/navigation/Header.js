@@ -29,7 +29,7 @@ const HeaderImage = styled.img`
 
 `
 
-const NavButton = styled.button`
+const NavButton = styled.a`
 
     font-family: 'Work Sans';
     color: white;
