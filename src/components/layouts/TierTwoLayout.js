@@ -59,7 +59,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
         return (
             <div
             onClick={() => onClick(id)}
-            className={`rounded-md h-[40vw] w-[40vw] sm:h-[26vw] sm:w-[26vw] md:h-[20vw] md:w-[20vw] max-w-[280px]
+            className={`rounded-md h-[34vw] w-[34vw] sm:h-[22vw] sm:w-[22vw] md:h-[16vw] md:w-[16vw] max-w-[200px]
                 ${selected && (selectedImages.length <= 5 || selectedImages.length === 14) ? 'ring-1 ring-zinc-50' : ''}
                 ${selected && selectedImages.length > 5 && selectedImages.length < 14 ? 'ring-2 ring-red-700 animate-pulse' : '' }
                 ${!selected && selectedImages.length >= 3 && selectedImages.length <= 5 ? 'opacity-25 hover:opacity-100' : '' }
