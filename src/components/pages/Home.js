@@ -26,6 +26,9 @@ const Home = () => {
     // the artist with an ID and image. Use the ID to plug into soldOutImages which will identify in TierTwoLayout which images need to be overlayed with "SOLD OUT" 
     const [soldOutImages, setSoldOutImages] = useState([])
 
+    const [goldPrice, setGoldPrice] = useState(0.4);
+    const [blackPrice, setBlackPrice] = useState(0.08);
+
     // Check to see if desktop or mobile
 
     const [width, setWindowWidth] = useState()
@@ -47,41 +50,23 @@ const Home = () => {
     }
 
     const responsive = {
-        showTopNavMenu: width > 1073
+        showTopNavMenu: width > 1023
     }
 
     ///////////////////////////////////
 
 
     return (
-        <>
-        {
-        (responsive.showTopNavMenu) ? (
-            <PageLayout>
-                <Header />
-                <Carousel/>
-                <LargeContainer>
-                    <TierOneLayout firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
-                    <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
-                    <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
-                </LargeContainer>
-                <Footer/>
-            </PageLayout>
-
-        ) : (
-            <PageLayoutMobile>
-                <HeaderMobile />
-                <CarouselMobile/>
-                <LargeContainerMobile>
-                    <TierOneLayoutMobile firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
-                    <TierTwoLayoutMobile selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
-                    <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
-                </LargeContainerMobile>
-                <FooterMobile/>
-            </PageLayoutMobile>
-        )
-    }
-    </>
+        <PageLayout>
+            {responsive.showTopNavMenu ? <Header/> : <HeaderMobile/>}
+            <Carousel/>
+            <LargeContainer>
+            <TierOneLayout firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
+            <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
+        <TierThreeLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} responsive={responsive.showTopNavMenu}/>
+        </LargeContainer>
+        {responsive.showTopNavMenu ? <Footer/> : <FooterMobile/>}
+    </PageLayout>
         
     );
 };
@@ -92,25 +77,11 @@ const PageLayout = styled.div`
 width: 100%;
 background-color: black;
 `
-const PageLayoutMobile = styled.div`
-    padding: 0px;
-
-    position: absolute;
-    width: 100vw;
-
-    /* lilac */
-
-    background-color: black;
-    
-`;
 
 
 const LargeContainer = styled(Container)`
-max-width: 1200px; margin: 3rem auto;
-`
-
-const LargeContainerMobile = styled(Container)`
-width: 100vw; 
+max-width: 1200px; 
 margin: 3rem auto;
-padding: 2rem;
+padding: 1rem;
+width: 90vw;
 `

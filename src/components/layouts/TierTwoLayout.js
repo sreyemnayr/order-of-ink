@@ -25,7 +25,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
 
 
     const handleImageClick = (id) => {
-        if (selectedImages.length < 5 || selectedImages.includes(id)) {
+        if (selectedImages.length < 15 || selectedImages.includes(id)) {
         if (selectedImages.includes(id)) {
             const index = selectedImages.indexOf(id);
             const newSelectedImages = [...selectedImages];
@@ -38,7 +38,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
     };
 
     const handleRandom = () => {
-        const randomButtons = [];
+       /* const randomButtons = [];
         const usedIndexes = [];
     
         for (let i = 0; i < 5; i++) {
@@ -50,25 +50,35 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
             i--;
           }
         }
-        setSelectedImages(randomButtons);
+        
+        setSelectedImages(randomButtons);*/
+        setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])
       };
 
     const ImageButton = ({ image, id, onClick, selected, soldOut }) => {
         return (
-          <div
+            <div
             onClick={() => onClick(id)}
+            className={`rounded-md h-[40vw] w-[40vw] sm:h-[26vw] sm:w-[26vw] md:h-[20vw] md:w-[20vw]
+                ${selected && (selectedImages.length <= 5 || selectedImages.length === 14) ? 'ring-1 ring-zinc-50' : ''}
+                ${selected && selectedImages.length > 5 && selectedImages.length < 14 ? 'ring-2 ring-red-700 animate-pulse' : '' }
+                ${!selected && selectedImages.length >= 3 && selectedImages.length <= 5 ? 'opacity-25 hover:opacity-100' : '' }
+                ${!selected && selectedImages.length < 3 ? 'opacity-50 hover:opacity-100': ''}
+                
+            }`}
             style={{
-              border: selected ? '1px solid white' : 'none',
-              borderRadius: '5px',
-              width:  '257px',
-              height: '257px',
-              display: 'inline-block',
+              // border: selected ? '1px solid white' : 'none',
+              // borderRadius: '5px',
+              // width:  '192px',
+              // height: '192px',
+              // width: '100%',
+              // height: '192px',
               backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
+              backgroundSize: 'contain',
               backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
               cursor: 'pointer',
-              
-            
+     
               boxSizing: "border-box"
             }}
           >
@@ -107,11 +117,14 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
             </Row>
             <br/>
             <br/>
-            <SubSubtitleCol className="flex justify-center">Select 3-5 artists below to mint their work.*</SubSubtitleCol>
+            <SubSubtitleCol className="text-center justify-center">Select <span className={`
+            ${selectedImages.length > 5 ? 'underline decoration-dashed text-red-500' : ''}
+            ${selectedImages.length < 3 ? 'underline decoration-dashed text-amber-200' : ''}
+            `}>3-5</span> artists below to mint their work.*</SubSubtitleCol>
             <br/>
             <br/>
             <div className="w-full flex flex-col justify-center items-center" >
-                <div className="grid grid-rows-5 grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-center flex gap-4">
                 {combinedArtists.map((artist) => {
                         return (
                         <ImageButton image={artist.image}
@@ -129,7 +142,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
                     
                     {/* <SelectForMe>Select Artist For Me</SelectForMe> */}
                 </div>
-                <Disclaimer className="col-span-4 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
+                <Disclaimer className="col-span-2 sm:col-span-3 md:col-span-4 row-span-1 flex py-6">Disclaimer: Our system is set up to give you the maximum information available about which artists’ work are still available. In the event that our site is overloaded or not updating properly, there may be errors that happen. We will do our best to make sure you can mint the artists you want but cannot guarantee actual results due to the fast moving nature of this process</Disclaimer>
                 </div>
             </div>
             
@@ -244,8 +257,6 @@ color: #FFFFFF;
 `
 
 const Disclaimer = styled.div`
-width: 1050px;
-height: 26px;
 
 
 /* Body text */

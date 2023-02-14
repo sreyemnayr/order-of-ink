@@ -27,7 +27,7 @@ function FooterMobile() {
             <div className="grid grid-rows-11 grid-cols-1 mt-20 py-6 mx-6">
                     <TattoosOfTheFuture className="py-4">Tattoos of the future</TattoosOfTheFuture>
                     <FooterFont><div className="font-extrabold inline-block">Partnerships:</div><a className="inline-block px-2 font-grey underline" href='mailto:info@theorderofink.com?subject=Me&body=Hello!'>info@theorderofink.com</a></FooterFont>
-                    <EmailInput/>
+                    
                     <FooterFont className="flex gap-x-4">
                         <a href="https://www.instagram.com/theorderofink/"><SocialIcon src={iglogo}/></a>
                         <a href="https://twitter.com/TheOrderofInk"><SocialIcon src={twitterlogo}/></a>

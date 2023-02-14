@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import MintBoxExample from '../../images/MintBoxExample.png'
-import QuantitySelectorSmall from './QuantitySelectorSmall'
+import QuantitySelector from './QuantitySelector'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { getCombinedArtists } from '../utils/getCombinedArtists'
@@ -18,7 +18,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
     }, [])
 
     const handleImageClick = (id) => {
-        if (selectedImages.length < 5 || selectedImages.includes(id)) {
+        if (selectedImages.length < 15 || selectedImages.includes(id)) {
         if (selectedImages.includes(id)) {
             const index = selectedImages.indexOf(id);
             const newSelectedImages = [...selectedImages];
@@ -35,7 +35,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
         <>
         <SubSubtitleCol className="flex justify-center">
             <FullBox>
-                <div className="grid grid-rows-1 sm:grid-cols-1 md:grid-cols-2 align-items-center p-1">
+                <div className="grid grid-rows-1 grid-cols-1 lg:grid-cols-2 align-items-center p-1">
       
                     <ExampleImage src={MintBoxExample}/>
                     <div className="grid grid-rows-3 grid-cols-2 flex">
@@ -48,31 +48,28 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.08 ETH</p>
                         </div>
                         <div className="flex justify-end">
-                            <QuantitySelectorSmall quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
+                            <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                         </div>
                         <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
                             FINAL SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.4 ETH</p>
                         </div>
                         <div className="flex justify-end">
-                            <QuantitySelectorSmall quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
+                            <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                         </div>
                         <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
                             ARTISTS
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
-                            
-                        </div>
-                        <div className="flex justify-center col-span-2">
-                            <div className="grid grid-rows-3 grid-cols-5 flex">
+                        
+                        <div className="flex justify-center lg:col-span-2 w-full">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 flex w-full gap-2 pl-[2rem]">
                             {combinedArtists.map((artist) => {
                                 return (
-                                    <div>
-                                    {(selectedImages.includes(artist.id)) ?
-                                    (<ArtistButtonSelected onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButtonSelected>) : 
-                                    (<ArtistButton onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButton>)}
+                                    <ArtistButton className={`w-full p-1 bg-zinc-800 text-zinc-50 ring-1 ring-zinc-50 ${
+                                        selectedImages.includes(artist.id) ? 'opacity-100' : 'opacity-25'
+                                    }`} onClick={() => handleImageClick(artist.id)}>{artist.name}</ArtistButton>
                                     
-                                    </div>
+                                    
                                 )
                             })}
                             </div>
@@ -124,12 +121,10 @@ const SubSubtitleCol = styled(Col)`
 
 
 const ArtistButton = styled.button`
-background: #111111;
+
 border: none;
 border-radius: 5px;
-height: 21px;
-width: 81px;
-margin: 3px;
+
 
 font-family: 'Work Sans';
 font-style: normal;
@@ -140,16 +135,13 @@ line-height: 14px;
 text-align: center;
 text-transform: uppercase;
 
-color: #FFFFFF;
+
 `
 
 const ArtistButtonSelected = styled.button`
 background: #111111;
 border: 1px solid white;
 border-radius: 5px;
-height: 21px;
-width: 81px;
-margin: 3px;
 
 font-family: 'Work Sans';
 font-style: normal;
@@ -174,8 +166,7 @@ background: #333333;
 
 const ExampleImage = styled.img`
 border-radius: 5px;
-height: 517px;
-width: 517px;
+
 `
 
 

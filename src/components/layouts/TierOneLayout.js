@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 
-function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, reponsive}) {
+function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
 
     //Local states to determine whether a "What's Included" button is clicked, opening up extra content for the user.
     const [firstSecondIncluded, setFirstSecondIncluded] = useState(false)
@@ -47,24 +47,24 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                 </SessionInfoCol>
             </Row>
             <br/>
-            <div className="md:flex">
-                <div className="sm:w-full md:w-2/3 px-2">
-                    <SessionCardOne firstSecondIncluded={firstSecondIncluded}>
+            <div className="md:flex ">
+                <div className="w-full md:w-2/3 px-2 mt-1 md:mt-0">
+                    <div className={`bg-zinc-800 rounded-md ${firstSecondIncluded ? 'border border-zinc-50' : ''}`}> {/* SessionOneCard */}
                         <div className="flex p-2">
-                            <div className="w-1/2 flex flex-col justify-center px-1">
+                            <div className="w-1/2 flex flex-col justify-start px-1">
                                 <img src={SessionOne}/>
                  
-                                <SessionText className="flex justify-center py-2">Session One</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Session One</SessionText>
                                
-                                <SessionText className="flex justify-center">1/15</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/15</SessionText>
                             </div>
-                            <div className="w-1/2 flex flex-col justify-center px-1">
+                            <div className="w-1/2 flex flex-col justify-start px-1">
                                 
                                 <img src={SessionTwo}/>
                     
-                                <SessionText className="flex justify-center py-2">Session Two</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Session Two</SessionText>
                                 
-                                <SessionText className="flex justify-center">1/8</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/8</SessionText>
                                 
                             </div>
                         </div>
@@ -78,7 +78,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
                             </SessionSubText>
                       
-                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className="flex justify-center py-7" firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
+                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${firstSecondIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
                 
                         </div>
 
@@ -87,9 +87,10 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
 
                         {/* Whats included content */}
                         {firstSecondIncluded && 
-                        <div className="flex justify-center">
-                        <div className="w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
-                            <ul style={{listStyleType: 'disc'}}>
+                        <div className="flex justify-center w-full flex-wrap md:flex-nowrap bg-neutral-500">
+                        <div className="w-full md:w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word"}}>
+                        <div className="md:hidden text-white -ml-[10px] " style={{fontFamily: "Work Sans"}}>FIRST SESSION</div>
+                            <ul className="list-disc">
                                 <Line>
                                 Genesis Collection Order of Ink digital collectible
                                 </Line>
@@ -113,8 +114,9 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                             
 
                             </div>
-                            <div className="w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px" }}>
-                            <ul style={{listStyleType: 'disc'}}>
+                            <div className="w-full md:w-1/2 flex flex-col mx-4" style={{ wordWrap: "break-word"}}>
+                            <div className="md:hidden text-white -ml-[10px] " style={{fontFamily: "Work Sans"}}>SECOND SESSION</div>
+                            <ul className="list-disc" >
                                 <Line>
                                 Genesis Collection Order of Ink digital collectible
                                 </Line>
@@ -130,7 +132,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                 
                             </ul>
                             <br/>
-                            <div style={{color: "white", fontFamily: "Work Sans"}}>IRL:</div>
+                            <div className="text-white" style={{fontFamily: "Work Sans"}}>IRL:</div>
                             <ul style={{listStyleType: "disc"}}>
                                 <Line>
                                 Access to physical tattoo giveaways
@@ -147,22 +149,22 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
 
 
 
-                    </SessionCardOne>
+                    </div>
                 </div>
-                <div className="sm:w-full md:w-1/3 px-2">
-                    <SessionCardTwo thirdIncluded={thirdIncluded}>
-                        <div className="flex">
+                <div className="w-full md:w-1/3 px-2 mt-1 md:mt-0">
+                <div className={`bg-zinc-800 rounded-md ${thirdIncluded ? 'border border-zinc-50' : ''}`}>
+                        <div className="flex p-2">
                             <div className="w-full flex flex-col justify-center">
-                                <img src={SessionThree}/>
-                                <SessionText className="flex justify-center py-2">Final Session</SessionText>
-                                <SessionText className="flex justify-center">1/1</SessionText>
+                                <img alt="Session Final" src={SessionThree}/>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Final Session</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/1</SessionText>
                                 <SessionSubText className="flex justify-center mt-6">Presale Price: 0.4 ETH</SessionSubText>
                                 <SessionSubText className="flex justify-center">Public Price: 0.5 ETH</SessionSubText>
                                 <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
                                 </SessionSubText>
-                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className="flex justify-center py-7" thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
+                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${thirdIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
                             </div>
                         </div>
 
@@ -172,7 +174,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
 
                         {/* Whats included content */}
                         {thirdIncluded && 
-                        <div className="flex justify-center">
+                        <div className="flex justify-center w-full flex-wrap md:flex-nowrap bg-neutral-500">
                         <div className="w-full flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
                             <ul style={{listStyleType: 'disc'}}>
                                 <Line>
@@ -209,7 +211,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
 
 
 
-                    </SessionCardTwo>
+                    </div>
                 </div>
             </div>
 
@@ -228,8 +230,8 @@ const TitleCol = styled(Col)`
     font-family: 'Alternate Gothic';
     font-style: normal;
     font-weight: 400;
-    font-size: 63px;
-    line-height: 76px;
+    font-size: 4rem;
+    line-height: 1;
     /* identical to box height */
 
     text-transform: uppercase;
@@ -304,8 +306,8 @@ const SessionText = styled.p`
 font-family: 'Alternate Gothic';
 font-style: normal;
 font-weight: 400;
-font-size: 32px;
-line-height: 38px;
+/* font-size: 1.25rem; */
+/* line-height: 1; */
 text-transform: uppercase;
 
 color: #FFFFFF;
@@ -316,12 +318,9 @@ const SessionButton = styled.button`
 font-family: 'Alternate Gothic';
 font-style: normal;
 font-weight: 400;
-font-size: 32px;
-line-height: 38px;
+
 text-transform: uppercase;
 border: none;
-
-background: none;
 
 
 color: #FFFFFF;

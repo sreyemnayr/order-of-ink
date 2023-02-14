@@ -56,15 +56,18 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, soldOutImages})
             return (
               <div
                 onClick={() => onClick(id)}
+                className="h-[45vw] sm:h-[30vw] md:h-[22vw]"
                 style={{
                   border: selected ? '1px solid white' : 'none',
                   borderRadius: '5px',
-                  width:  '192px',
-                  height: '192px',
-                  
+                  // width:  '192px',
+                  // height: '192px',
+                  width: '100%',
+                  // height: '192px',
                   backgroundImage: `url(${image})`,
-                  backgroundSize: 'cover',
+                  backgroundSize: 'contain',
                   backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
                   cursor: 'pointer',
          
                   boxSizing: "border-box"
@@ -109,7 +112,7 @@ function TierTwoLayoutMobile({selectedImages, setSelectedImages, soldOutImages})
             <br/>
             <br/>
             <div className="w-full" >
-                <div className="grid grid-rows-9 grid-cols-2 justify-center flex gap-2">
+                <div className="grid grid-rows-9 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-center flex gap-2">
                 {combinedArtists.map((artist) => {
                         return (
                         <ImageButtonMobile image={artist.image}

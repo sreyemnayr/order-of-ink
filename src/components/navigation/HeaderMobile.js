@@ -12,7 +12,7 @@ function HeaderMobile() {
         
         <HeaderContainer style={{backgroundImage: `url(${OrderOfInkHeader})`}} className="relative bg-cover bg-center h-screen"> 
         <nav className="p-8 md:flex-row md:space-x-6">
-            <CloseButton className="float-right cursor-pointer" onClick={() => setShowNav(false)}>&times;</CloseButton>
+            
             <Hamburger onClick={() => setShowNav(p => !p)} className="float-right z-1 cursor-pointer">
                 <div className="w-8 h-0.5 bg-white"></div>
                 <div className="w-8 h-0.5 bg-white mt-2"></div>

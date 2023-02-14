@@ -5,12 +5,12 @@ function QuantitySelector({quantity, setQuantity}) {
 
 
     return (
-        <SelectorBox>
+        <div className="h-45 w-full flex items-center justify-center">
             <SubtractButton onClick={()=>setQuantity(quantity-1)}/>
             <QuantityDisplay>{quantity}</QuantityDisplay>
             <AddButton onClick={()=>setQuantity(quantity+1)}>+</AddButton>
 
-        </SelectorBox>
+        </div>
     )
 
 }
@@ -59,7 +59,8 @@ const AddButton = styled.button`
 `
 
 const QuantityDisplay = styled.div`
-  width: 176px;
+  max-width: 176px;
+  width: 50%;
   height: 45px;
   display: flex;
   align-items: center;
