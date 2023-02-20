@@ -27,7 +27,7 @@ export const zenGoWallet = ({ chains }: MyWalletOptions): Wallet => ({
       mobile: {
         getUri: async () => {
           const { uri } = (await connector.getProvider()).connector;
-          return uri;
+          return `https://get.zengo.com/wc?uri=${encodeURIComponent(uri)}`;
         },
       },
       qrCode: {

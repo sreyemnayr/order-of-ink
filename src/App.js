@@ -13,6 +13,8 @@ import { mainnet, goerli } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
