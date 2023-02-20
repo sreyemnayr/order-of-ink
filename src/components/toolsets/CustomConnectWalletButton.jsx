@@ -57,7 +57,7 @@ export const CustomConnectButton = ({className="", buttonClassName=""}) => {
                   fontFamily: 'Alternate Gothic',
                 }}
                  onClick={openAccountModal} type="button" className={`${buttonClassName} bg-zinc-500 text-2xl text-zinc-50 p-3 rounded-md inline text-gabe-black hover:text-flame-yellow hover:stroke-flame-orange hover:stroke-2`}>
-                  {account.displayName}
+                  {account?.ensName || account.address}
                 </button>
                 
               );

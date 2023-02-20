@@ -4,7 +4,10 @@ import { Route, BrowserRouter as Router, Routes} from 'react-router-dom'
 import Home from './components/pages/Home'
 
 
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, getDefaultWallets, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { injectedWallet, metaMaskWallet, coinbaseWallet, walletConnectWallet, rainbowWallet, ledgerWallet, braveWallet } from '@rainbow-me/rainbowkit/wallets';
+import { zenGoWallet } from './components/toolsets/zenGoWalletConnector';
+
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { mainnet, goerli } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
@@ -26,10 +29,25 @@ const { chains, provider, webSocketProvider } = configureChains(
   ]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: 'Order of Ink',
-  chains,
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      injectedWallet({chains}),
+      zenGoWallet({chains}),
+    ],
+  },
+  {
+    groupName: 'Others',
+    wallets: [
+      metaMaskWallet({chains}),
+      walletConnectWallet({chains}),
+      braveWallet({chains}),
+      ledgerWallet({chains}),
+      coinbaseWallet({chains, appName: 'Order of Ink'}),
+    ]
+  }
+]);
 
 const wagmiClient = createClient({
   autoConnect: true,

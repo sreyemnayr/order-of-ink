@@ -54,15 +54,18 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
         setSelectedImages(randomButtons);*/
         setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])
       };
+      
 
-    const ImageButton = ({ image, id, onClick, selected, soldOut }) => {
+    const ImageButton = ({ image="", hoverImage="", selectedImage="", id, onClick, selected, soldOut }) => {
+        console.log(image, hoverImage, selectedImage);
         return (
             <div
             onClick={() => onClick(id)}
             className={`rounded-md h-[34vw] w-[34vw] sm:h-[22vw] sm:w-[22vw] md:h-[16vw] md:w-[16vw] max-w-[200px]
-                ${selected && (selectedImages.length <= 5 || selectedImages.length === 14) ? 'ring-1 ring-zinc-50' : ''}
-                ${selected && selectedImages.length > 5 && selectedImages.length < 14 ? 'ring-2 ring-red-700 animate-pulse' : '' }
-                ${!selected && selectedImages.length >= 3 && selectedImages.length <= 5 ? 'opacity-25 hover:opacity-100' : '' }
+                ${selected ? selectedImage : image}
+                ${hoverImage}
+                ${selected ? 'ring-1 ring-zinc-50' : ''}
+                ${!selected && selectedImages.length >= 3 ? 'opacity-25 hover:opacity-100' : '' }
                 ${!selected && selectedImages.length < 3 ? 'opacity-50 hover:opacity-100': ''}
                 
             }`}
@@ -73,7 +76,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
               // height: '192px',
               // width: '100%',
               // height: '192px',
-              backgroundImage: `url(${image})`,
+              // backgroundImage: `url(${image})`,
               backgroundSize: 'contain',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -118,16 +121,17 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
             <br/>
             <br/>
             <SubSubtitleCol className="text-center justify-center">Select <span className={`
-            ${selectedImages.length > 5 && selectedImages.length < 14 ? 'underline decoration-dashed text-red-500' : ''}
             ${selectedImages.length < 3 ? 'underline decoration-dashed text-amber-200' : ''}
-            `}>3-5</span> artists below to mint their work.*</SubSubtitleCol>
+            `}>3+</span> artists below to mint their work.*</SubSubtitleCol>
             <br/>
             <br/>
             <div className="w-full flex flex-col justify-center items-center" >
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-center flex gap-4">
                 {combinedArtists.map((artist) => {
                         return (
-                        <ImageButton image={artist.image}
+                        <ImageButton image={artist.default_image}
+                        selectedImage={artist.selected_image}
+                        hoverImage={artist.hover_image}
                         id={artist.id}
                         key={`artist_picture_${artist.id}`}
                         onClick={handleImageClick}
