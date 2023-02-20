@@ -17,6 +17,7 @@ export const zenGoWallet = ({ chains }: MyWalletOptions): Wallet => ({
     android: 'https://go.zengo.com/uCxL/2gmira9n',
     ios: 'https://go.zengo.com/uCxL/2gmira9n',
     browserExtension: 'https://go.zengo.com/uCxL/2gmira9n',
+    qrCode: 'https://go.zengo.com/uCxL/2gmira9n',
   },
   createConnector: () => {
     const connector = getWalletConnectConnector({ chains });
