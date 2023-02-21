@@ -28,8 +28,8 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
         ...contract,
         functionName: 'getInked',
         args: [
-            sessionOneKeys?.[address.toLowerCase()]?.[0],
-            sessionOneKeys?.[address.toLowerCase()]?.[1],
+            sessionOneKeys?.[address?.toLowerCase()]?.[0],
+            sessionOneKeys?.[address?.toLowerCase()]?.[1],
             firstSecondQuantity,
             thirdQuantity,
             packedChoices,

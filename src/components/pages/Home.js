@@ -82,8 +82,8 @@ const Home = () => {
     }, [data])
 
     useEffect(() => {
-        setFree((sessionOneKeys?.[address.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
-        setAllowed(sessionOneKeys?.[address.toLowerCase()]?.[1]?.[2] - minted || 0)
+        setFree((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
+        setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted || 0)
     }, [address, freeMinted, minted])
 
     // Check to see if desktop or mobile
