@@ -1,15 +1,78 @@
 import styled from 'styled-components'
-import MintBoxExample from '../../images/MintBoxExample.png'
+import MintBoxExample from '../../images/sneakpeek_gif.gif'
 import QuantitySelector from './QuantitySelector'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { getCombinedArtists } from '../utils/getCombinedArtists'
 import react, {useState, useEffect} from 'react'
+import { formatUnits } from 'ethers/lib/utils.js';
 import { getTotalPrice } from '../utils/getTotalPrice'
 
-function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
+import sessionOneKeys from '../../data/session_1_mintkeys.json'
+
+import { useAccount, useContract, useContractReads, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
+import inkABI from '../../data/OrderOfInk.json'
+
+const contract = {
+    address: '0x7B67E3661942FDA6C1D73bBe99856B6a11CdD2EE',
+    abi: inkABI,
+  }
+
+function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, free, allowed, mintInfo, packedChoices}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
+    const { address, isConnected } = useAccount()
+    
+
+    const { config } = usePrepareContractWrite({
+        ...contract,
+        functionName: 'getInked',
+        args: [
+            sessionOneKeys?.[address.toLowerCase()]?.[0],
+            sessionOneKeys?.[address.toLowerCase()]?.[1],
+            firstSecondQuantity,
+            thirdQuantity,
+            packedChoices,
+        ],
+        overrides: {
+            value: mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity))
+        }
+    })
+
+    const [successMessage, setSuccessMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
+    const [txHash, setTxHash] = useState(null)
+
+    const {
+        data:txData,
+        write,
+        isLoading:txIsLoading,
+        isError:txIsError,
+        error:txError,
+        isSuccess:txIsSuccess,
+    } = useContractWrite({
+        ...config,
+        onSuccess(data) {
+            setTxHash(data.hash)
+        },
+        onError(error) {
+            setErrorMessage(error.message)
+        }
+    })
+
+    const { data: pendingTxData, status: txStatus} = useWaitForTransaction({
+        hash: txData?.hash,
+        onError(error) {
+            console.log(error)
+            setErrorMessage(error.message)
+        }
+    })
+
+
+
+    useEffect(()=>{
+        console.log(txData);
+    }, [txData]);
 
     useEffect(() => {
         const artists = getCombinedArtists()
@@ -45,17 +108,17 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         </div>
                         <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
                             FIRST/SECOND SESSION
-                            <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.08 ETH</p>
+                            <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.blackPrice, "ether")} ETH</p>
                         </div>
                         <div className="flex justify-end">
-                            <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
+                            <QuantitySelector free={free} quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity}  />
                         </div>
                         <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
                             FINAL SESSION
-                            <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>0.4 ETH</p>
+                            <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.goldPrice, "ether")} ETH</p>
                         </div>
                         <div className="flex justify-end">
-                            <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
+                            <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                         </div>
                         <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
                             ARTISTS
@@ -79,11 +142,20 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL</p>
                         </div>
                         <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
-                            <p>{getTotalPrice(firstSecondQuantity, thirdQuantity)} ETH</p>
+                            <p>{formatUnits(mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity)), "ether")} ETH</p>
                         </div>
                         <br/>
                         <div className="flex justify-center col-span-2 pt-8">
-                            <MintButton>Mint</MintButton>
+                            <MintButton onClick={()=> {write?.()}}>Mint</MintButton>
+                            {txStatus === "loading" && (
+                            <>Your mint is loading! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></>
+                            )}
+                            {txStatus === "error" && (
+                                <>ERROR: {errorMessage}</>
+                            )}
+                            {txStatus === "success" && (
+                                <>SUCCESS! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></>
+                            )}
                         </div>
                         
     

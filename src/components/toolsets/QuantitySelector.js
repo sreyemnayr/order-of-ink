@@ -1,14 +1,22 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'; 
 
-function QuantitySelector({quantity, setQuantity}) {
+function QuantitySelector({quantity, setQuantity, total, free=0, allowed=10}) {
 
 
     return (
         <div className="h-45 w-full flex items-center justify-center">
-            <SubtractButton onClick={()=>setQuantity(quantity-1)}/>
-            <QuantityDisplay>{quantity}</QuantityDisplay>
-            <AddButton onClick={()=>setQuantity(quantity+1)}>+</AddButton>
+            {allowed > -1 ? (
+            <>
+                <SubtractButton onClick={()=>setQuantity((cur) => cur-(cur > 0 ? 1 : 0))}/>
+                <QuantityDisplay>{quantity}{' '}{free > 0 ? <sup className='ml-1 text-sm'>{` +${free} FREE`}</sup>:''}</QuantityDisplay>
+                <AddButton onClick={()=>setQuantity((cur) => cur+(total !== allowed ? 1 : 0))} className={total === allowed ? `text-amber-500 text-sm leading-none` : `border border-white rounded-full text-zinc-200 text-4xl`} >
+                    {total !== allowed ? '+' : allowed === 0 ? 'NONE ALLOWED' : `MAX ${allowed}`}
+                </AddButton>
+            </>
+            ) : (
+                <div>The connected wallet is not on the allow list for the current minting period.</div>
+            )}
 
         </div>
     )
@@ -50,12 +58,12 @@ const AddButton = styled.button`
     justify-content: center;
     width: 34px;
     height: 34px;
-    border-radius: 20px;
+    /*border-radius: 20px;*/
     background-color: transparent;
-    border: 1px solid white;
-    font-size: 36px;
+    /*border: 1px solid white;*/
+    /*font-size: 36px;*/
     cursor: pointer;
-    color: #D9D9D9;
+    /*color: #D9D9D9;*/
 `
 
 const QuantityDisplay = styled.div`

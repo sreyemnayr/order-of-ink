@@ -1,0 +1,1 @@
+export const pack_choices = (artists: number[], offset: number = 1) => artists.reduce((a,cv)=>a+(1 << (cv+offset)), 0)

@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Routes} from 'react-router-dom'
 import Home from './components/pages/Home'
 
 
-import { RainbowKitProvider, getDefaultWallets, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, connectorsForWallets, DisclaimerComponent } from '@rainbow-me/rainbowkit';
 import { injectedWallet, metaMaskWallet, coinbaseWallet, walletConnectWallet, rainbowWallet, ledgerWallet, braveWallet } from '@rainbow-me/rainbowkit/wallets';
 import { zenGoWallet } from './components/toolsets/zenGoWalletConnector';
 
@@ -19,7 +19,7 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 const { chains, provider, webSocketProvider } = configureChains(
   [
     mainnet,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+    ...(process.env.REACT_APP_ENABLE_TESTNETS === 'true' ? [goerli] : []),
   ],
   [
     alchemyProvider({
@@ -47,6 +47,7 @@ const connectors = connectorsForWallets([
       braveWallet({chains}),
       ledgerWallet({chains}),
       coinbaseWallet({chains, appName: 'Order of Ink'}),
+      rainbowWallet({chains})
     ]
   }
 ]);
@@ -57,6 +58,20 @@ const wagmiClient = createClient({
   provider,
   webSocketProvider,
 });
+
+const disclaimer = ({Text, Link}) => (
+  <Text>
+    By connecting your wallet, you agree to the {' '}
+      <Link href="https://www.theorderofink.com/terms-conditions">Terms and Conditions</Link> {' '}
+      and acknowledge that you have read and understand the {' '}
+      <Link href="https://www.theorderofink.com/privacypolicy">Privacy Policy</Link>
+  </Text>
+)
+
+const appInfo = {
+  appName: 'Order of Ink Mint',
+  disclaimer
+}
 
 
 function App() {
@@ -70,7 +85,7 @@ function App() {
     <>
     {ready ? (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} appInfo={appInfo} >
         <Router>
           <Routes>
             <Route 

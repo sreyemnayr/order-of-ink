@@ -1,13 +1,8 @@
 import styled from 'styled-components'
-import SessionOne from '../../images/FirstSession.png'
-import SessionTwo from '../../images/SecondSession.png'
-import SessionThree from '../../images/ThirdSession.png'
-import QuantitySelector from '../toolsets/QuantitySelector'
 import React, {useState, useEffect} from 'react'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { handleImageClick } from '../../hooks/handleImageClick'
+// import { handleImageClick } from '../../hooks/handleImageClick'
 import { getCombinedArtists } from '../utils/getCombinedArtists'
 
 
@@ -19,22 +14,27 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
 
     useEffect(() => {
         const artists = getCombinedArtists()
-        console.log(artists)
+        // console.log(artists)
         setCombinedArtists(artists)
     }, [])
 
 
     const handleImageClick = (id) => {
-        if (selectedImages.length < 15 || selectedImages.includes(id)) {
-        if (selectedImages.includes(id)) {
-            const index = selectedImages.indexOf(id);
-            const newSelectedImages = [...selectedImages];
-            newSelectedImages.splice(index, 1);
-            setSelectedImages(newSelectedImages);
+        if(selectedImages.includes(id)){
+            setSelectedImages((cur)=>cur.filter(f=>f!==id));
         } else {
-            setSelectedImages([...selectedImages, id]);
+            setSelectedImages((cur)=>[...cur, id])
         }
-        }
+        // if (selectedImages.length < 15 || selectedImages.includes(id)) {
+        // if (selectedImages.includes(id)) {
+        //     const index = selectedImages.indexOf(id);
+        //     const newSelectedImages = [...selectedImages];
+        //     newSelectedImages.splice(index, 1);
+        //     setSelectedImages(newSelectedImages);
+        // } else {
+        //     setSelectedImages([...selectedImages, id]);
+        // }
+        // }
     };
 
     const handleRandom = () => {
@@ -57,7 +57,7 @@ function TierTwoLayout({selectedImages, setSelectedImages, soldOutImages}) {
       
 
     const ImageButton = ({ image="", hoverImage="", selectedImage="", id, onClick, selected, soldOut }) => {
-        console.log(image, hoverImage, selectedImage);
+        // console.log(image, hoverImage, selectedImage);
         return (
             <div
             onClick={() => onClick(id)}

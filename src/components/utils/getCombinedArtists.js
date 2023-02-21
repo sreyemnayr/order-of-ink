@@ -54,7 +54,7 @@ export const getCombinedArtists = () => {
 
     const combinedArtists = Artists.map((artist, index) => ({ name: artist, default_image: default_images[index], hover_image: hover_images[index], selected_image: selected_images[index], id: index }));
     
-    console.log(combinedArtists);
+    // console.log(combinedArtists);
     
 
     return combinedArtists

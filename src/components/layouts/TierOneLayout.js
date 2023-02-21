@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 
-function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity}) {
+function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, mintInfo, free, allowed}) {
 
     //Local states to determine whether a "What's Included" button is clicked, opening up extra content for the user.
     const [firstSecondIncluded, setFirstSecondIncluded] = useState(false)
@@ -68,14 +68,14 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 
                             </div>
                         </div>
-                        <div className="w-full flex flex-col justify-center">
+                        <div className="w-full flex flex-col justify-center text-zinc-50">
                             
-                            <SessionSubText className="flex justify-center mt-4">Presale Price: 0.08 ETH</SessionSubText>
-                            <SessionSubText className="flex justify-center">Public Price: 0.123 ETH</SessionSubText>
+                            <SessionSubText className={`flex justify-center mt-4 ${mintInfo?.session === 1 ? 'font-bold' : 'text-sm line-through text-zinc-400'}`}>Presale Price: 0.08 ETH</SessionSubText>
+                            <SessionSubText className={`flex justify-center ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.123 ETH</SessionSubText>
                 
                             <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
                             <SessionSubText className="flex justify-center">
-                                <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity}/>
+                                <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity} free={free} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                             </SessionSubText>
                       
                             <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${firstSecondIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
@@ -154,15 +154,15 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                 <div className="w-full md:w-1/3 px-2 mt-1 md:mt-0">
                 <div className={`bg-zinc-800 rounded-md ${thirdIncluded ? 'border border-zinc-50' : ''}`}>
                         <div className="flex p-2">
-                            <div className="w-full flex flex-col justify-center">
+                            <div className="text-zinc-50 w-full flex flex-col justify-center">
                                 <img alt="Session Final" src={SessionThree}/>
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Final Session</SessionText>
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/1</SessionText>
-                                <SessionSubText className="flex justify-center mt-6">Presale Price: 0.4 ETH</SessionSubText>
-                                <SessionSubText className="flex justify-center">Public Price: 0.5 ETH</SessionSubText>
+                                <SessionSubText className={`flex justify-center mt-6 ${mintInfo?.session === 1 ? 'font-bold' : 'line-through text-zinc-400 text-sm'}`}>Presale Price: 0.4 ETH</SessionSubText>
+                                <SessionSubText className={`flex justify-center ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.5 ETH</SessionSubText>
                                 <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
                                 <SessionSubText className="flex justify-center">
-                                    <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}/>
+                                    <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}  allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                                 </SessionSubText>
                                 <SessionButton onClick={() => setThirdIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${thirdIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
                             </div>
@@ -229,7 +229,7 @@ const TitleCol = styled(Col)`
 
     font-family: 'Alternate Gothic';
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     font-size: 4rem;
     line-height: 1;
     /* identical to box height */
@@ -243,7 +243,7 @@ const SubtitleCol = styled(Col)`
 
     font-family: 'Alternate Gothic';
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     font-size: 48px;
     line-height: 58px;
 
@@ -260,7 +260,7 @@ const BookYourSessionCol = styled(Col)`
 
     font-family: 'Work Sans';
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     font-size: 32px;
     line-height: 150%;
     /* identical to box height, or 48px */
@@ -275,7 +275,7 @@ const SessionInfoCol = styled(Col)`
 /* Body text */
 font-family: 'Work Sans';
 font-style: normal;
-font-weight: 400;
+/* font-weight: 400; */
 font-size: 14px;
 line-height: 153.8%;
 /* or 22px */
@@ -305,7 +305,7 @@ const SessionText = styled.p`
 
 font-family: 'Alternate Gothic';
 font-style: normal;
-font-weight: 400;
+/* font-weight: 400; */
 /* font-size: 1.25rem; */
 /* line-height: 1; */
 text-transform: uppercase;
@@ -317,7 +317,7 @@ const SessionButton = styled.button`
 
 font-family: 'Alternate Gothic';
 font-style: normal;
-font-weight: 400;
+/* font-weight: 400; */
 
 text-transform: uppercase;
 border: none;
@@ -330,12 +330,12 @@ const SessionSubText = styled.div`
 
 font-family: 'Work Sans';
 font-style: normal;
-font-weight: 400;
-font-size: 14px;
+/* font-weight: 400; */
+/* font-size: 14px; */
 line-height: 16px;
 text-transform: uppercase;
 
-color: #FFFFFF;
+/* color: #FFFFFF; */
 `
 
 
