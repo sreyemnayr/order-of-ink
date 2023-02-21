@@ -74,11 +74,14 @@ const Home = () => {
     
 
     useEffect(()=>{
-        console.log(data)
-        const [goldRemaining, blackRemaining, goldPrice, blackPrice, session] = data?.[0] || {goldRemaining: 0, blackRemaining: 0, goldPrice: 0.5, blackPrice: 0.5, session:1}
-        setMintInfo({goldRemaining: goldRemaining.toNumber(), blackRemaining: blackRemaining.toNumber(), goldPrice, blackPrice, session: session.toNumber()})
-        setMinted(data?.[1] || 0)
-        setFreeMinted(data?.[2] || 0)
+        if(data){
+            console.log(data)
+            const [goldRemaining, blackRemaining, goldPrice, blackPrice, session] = data?.[0] || {goldRemaining: 0, blackRemaining: 0, goldPrice: 0.5, blackPrice: 0.5, session:1}
+            setMintInfo({goldRemaining: goldRemaining.toNumber(), blackRemaining: blackRemaining.toNumber(), goldPrice, blackPrice, session: session.toNumber()})
+            setMinted(data?.[1] || 0)
+            setFreeMinted(data?.[2] || 0)
+        }
+        
     }, [data])
 
     useEffect(() => {
