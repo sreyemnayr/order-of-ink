@@ -42,7 +42,7 @@ function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuan
             </Row>
             <br/>
             <Row>
-                <BookYourSessionCol style={{fontSize: "14px", paddingBottom: "150px"}} className="flex justify-center">
+                <BookYourSessionCol style={{fontSize: "14px", paddingBottom: "150px"}} className=" justify-center">
                     See our <a href="https://www.theorderofink.com/faq" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">FAQ</a> section and our <a href="https://www.theorderofink.com/how-to-mint" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">How to Mint</a> page for more information
                 </BookYourSessionCol>
             </Row>

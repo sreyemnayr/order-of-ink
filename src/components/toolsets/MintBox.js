@@ -101,8 +101,8 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
     return (
         <>
         <SubSubtitleCol className="flex justify-center">
-            <FullBox>
-                <div className="grid grid-rows-1 grid-cols-1 lg:grid-cols-2 align-items-center p-1">
+            <FullBox className="m-0 md:m-2">
+                <div className="grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-8 align-items-center p-2 md:p-8">
       
                     <ExampleImage src={MintBoxExample}/>
                     <div className="grid grid-rows-3 grid-cols-2 flex">
@@ -110,26 +110,26 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div style={{fontSize: "48px"}} className="flex justify-center col-span-2">
                             Mint Details
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div className="col-span-2 md:col-span-1" style={{fontSize: "26px", marginTop: "-5px"}}>
                             FIRST/SECOND SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.blackPrice, "ether")} ETH</p>
                         </div>
-                        <div className="flex justify-end">
+                        <div className="col-span-2 md:col-span-1 flex justify-end">
                             <QuantitySelector free={free} quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity}  />
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div className="col-span-2 md:col-span-1" style={{fontSize: "26px", marginTop: "-5px"}}>
                             FINAL SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.goldPrice, "ether")} ETH</p>
                         </div>
-                        <div className="flex justify-end">
+                        <div className="col-span-2 md:col-span-1 flex justify-end">
                             <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                         </div>
-                        <div className="col-span-2" style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                        <div className="col-span-2" style={{fontSize: "26px", marginTop: "-5px"}}>
                             ARTISTS {selectedImages.length < 3 ? (<div className='md:ml-2 md:inline text-amber-500'>Please select 3+ <button className="ring-1 rounded-md hover:bg-amber-500 hover:text-zinc-50 text-base leading-none p-1 ring-amber-500 " onClick={()=>{setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])}}>Surprise Me</button></div>) : (<></>)}
                         </div>
                         
                         <div className="flex justify-center col-span-2 w-full">
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 flex w-full gap-2 pl-[2rem]">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 flex w-full gap-2 ">
                             {combinedArtists.map((artist) => {
                                 return (
                                     <ArtistButton key={`artist_light_${artist.id}`} className={`w-full p-1 bg-zinc-800 text-zinc-50 ring-1 ring-zinc-50 ${
@@ -152,7 +152,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         </div>
                         <div className="flex justify-center col-span-2 pt-4">
                             {paused ? 
-                                (<div className='text-zinc-50'>Minting is Currently Paused</div>) :
+                                (<div className='text-amber-500 text-center'>Minting is Currently Paused</div>) :
                                 selectedImages.length < 3 ? (<div className='text-amber-500'>Please select 3+ Artists </div>) :
                                 (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
                             }
@@ -237,9 +237,6 @@ color: #FFFFFF;
 `
 
 const FullBox = styled.div`
-
-padding: 2rem;
-
 
 background: #333333;
 
