@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Modal } from './Modal';
 
 // Data
-const data = [131,169,152,154,256,204,348,328,159,195,202,120,267,251,252,11,23,319,189,164,341,321,137,424,66,170,50,63,279]
+const data = [131,169,152,154,256,204,348,328,159,195,202,120,267,251,257,11,23,319,189,164,341,321,137,424,66,170,50,63,279]
 
 export const Carousel = () => {
   const maxScrollWidth = useRef(0);
@@ -132,21 +132,22 @@ export const Carousel = () => {
             return (
               <>
               <div
-                key={index}
+                key={`carousel_div_${resource}`}
                 className="carousel-item cursor-zoom-in text-center relative w-48 h-48 snap-start"
                 onClick={()=>{setModalUrl(video_src); console.log("clicked")}}
               >
-                <a
-                  href={resource.link}
+                <div
+                  key={`carousel_a_${resource}`}
                   className="h-full w-full aspect-square block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0"
                   style={{ backgroundImage: `url(${composite_src || ''})` }}
                 >
                   <img
+                    key={`carousel_img_${resource}`}
                     src={composite_src || ''}
                     alt="Order of Ink Preview"
                     className="w-full aspect-square hidden"
                   />
-                </a>
+                </div>
                 
               </div>
               
