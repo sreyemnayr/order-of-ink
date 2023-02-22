@@ -62,12 +62,9 @@ export const Carousel = () => {
     setCarouselInterval(true);
     if(!carouselInterval){
       setInterval(()=>{
-        console.log("Moving")
         if(carousel.current !== null){
         carousel.current.scrollLeft = carousel.current.scrollLeft > maxScrollWidth.current ? 0 : carousel.current.scrollLeft + 100;
-        console.log(carousel.current.scrollLeft)
         }
-
       }, 3500)
     }
     
