@@ -13,7 +13,7 @@ function Header() {
                 <NavButton href="https://www.theorderofink.com/#team">Team</NavButton>
                 <CustomConnectButton className="inline float-right" />
             </nav>
-            <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0 h-16 ...">Sneak Peek</SneakPeak>
+            <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0 h-16 ...">Sneak Peeks</SneakPeak>
         </div>
     )
 }

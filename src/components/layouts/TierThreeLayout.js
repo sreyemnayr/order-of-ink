@@ -18,7 +18,7 @@ function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuan
             <br/>
             <Row>
                 <BookYourSessionCol>
-                    Mint
+                    Mint {selectedImages.length < 3 ? (<div className="text-amber-400 text-base">You must select at least 3 artists (or choose "Surprise Me") to mint</div>) : (<></>)}
                 </BookYourSessionCol>
             </Row>
             <br/>
@@ -43,7 +43,7 @@ function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuan
             <br/>
             <Row>
                 <BookYourSessionCol style={{fontSize: "14px", paddingBottom: "150px"}} className="flex justify-center">
-                    See our FAQ section and our How to Mint page for more information
+                    See our <a href="https://www.theorderofink.com/faq" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">FAQ</a> section and our <a href="https://www.theorderofink.com/how-to-mint" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">How to Mint</a> page for more information
                 </BookYourSessionCol>
             </Row>
         </>

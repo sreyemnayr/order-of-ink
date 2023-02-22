@@ -23,6 +23,8 @@ import inkABI from '../../data/OrderOfInk.json'
 
 import sessionOneKeys from '../../data/session_1_mintkeys.json'
 
+import { saveAddress, storeReferrer, logVisit } from "@sharemint/sdk";
+
 
 const Home = () => {
     //Selected Images refer to the artists that are selected by the user. Both Tier 2 and 3 layout uses this to determine which artists are highlighted with white border
@@ -39,7 +41,7 @@ const Home = () => {
     const [mintInfo, setMintInfo] = useState({goldRemaining: 0, blackRemaining: 0, goldPrice: parseUnits("0.5", "ether"), blackPrice: parseUnits("0.123", "ether"), session:1})
     const [minted, setMinted] = useState(0)
     const [freeMinted, setFreeMinted] = useState(0)
-    const [allowed, setAllowed] = useState(0)
+    const [allowed, setAllowed] = useState(-1)
     const [free, setFree] = useState(0)
     const [paused, setPaused] = useState(true)
     
@@ -92,12 +94,16 @@ const Home = () => {
     }, [data])
 
     useEffect(() => {
-        console.log((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
-        console.log(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
-        console.log(sessionOneKeys?.[address?.toLowerCase()])
-        console.log(address)
-        setFree((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
-        setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
+        if(address){
+            saveAddress({ slug: "the-order-of-ink", address });
+            console.log((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
+            console.log(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
+            console.log(sessionOneKeys?.[address?.toLowerCase()])
+            
+            setFree((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
+            setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || -1)
+        }
+        
     }, [address, freeMinted, minted])
 
     // Check to see if desktop or mobile
@@ -105,6 +111,8 @@ const Home = () => {
     const [width, setWindowWidth] = useState()
 
     useEffect(() => {
+        storeReferrer();
+        logVisit({ slug: "the-order-of-ink" });
 
         updateDimensions();
 
@@ -147,7 +155,7 @@ const Home = () => {
             <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
         <TierThreeLayout paused={paused} packedChoices={packedChoices} mintInfo={mintInfo} free={free} allowed={allowed} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
         </LargeContainer>
-        {responsive.showTopNavMenu ? <Footer/> : <FooterMobile/>}
+        <FooterMobile/> 
     </PageLayout>
         
     );

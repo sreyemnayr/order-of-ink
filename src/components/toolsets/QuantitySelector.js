@@ -8,9 +8,9 @@ function QuantitySelector({quantity, setQuantity, total, free=0, allowed=10}) {
         <div className="h-45 w-full flex items-center justify-center">
             {allowed > -1 ? (
             <>
-                <SubtractButton onClick={()=>setQuantity((cur) => cur-(cur > 0 ? 1 : 0))}/>
-                <QuantityDisplay>{quantity}{' '}{free > 0 ? <sup className='ml-1 text-sm'>{` +${free} FREE`}</sup>:''}</QuantityDisplay>
-                <AddButton onClick={()=>setQuantity((cur) => cur+(total !== allowed ? 1 : 0))} className={total === allowed ? `text-amber-500 text-sm leading-none` : `border border-white rounded-full text-zinc-200 text-4xl`} >
+                <SubtractButton onClick={()=>setQuantity((cur) => cur-(cur > 0 ? 1 : 0))} className={`${quantity > 0 ? '' : 'opacity-0'}`}/>
+                <QuantityDisplay>{quantity}{' '}{free > 0 ? <sup className='ml-1 text-sm'>{`+${free}`} FREE</sup>:''}</QuantityDisplay>
+                <AddButton onClick={()=>setQuantity((cur) => cur+(total !== allowed ? 1 : 0))} className={total === allowed ? `text-amber-500 text-sm leading-none opacity-0` : `border border-white rounded-full text-zinc-200 text-4xl`} >
                     {total !== allowed ? '+' : allowed === 0 ? 'NONE ALLOWED' : `MAX ${allowed}`}
                 </AddButton>
             </>

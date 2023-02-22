@@ -24,8 +24,9 @@ function FooterMobile() {
       
     return (
         <div style={{backgroundImage: `linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url(${OrderOfInkFooter})`}} className="relative bg-cover bg-center backdrop-brightness-20">
-            <div className="grid grid-rows-11 grid-cols-1 mt-20 py-6 mx-6">
-                    <TattoosOfTheFuture className="py-4">Tattoos of the future</TattoosOfTheFuture>
+            <div className="flex flex-col md:flex-row py-6 mx-auto w-3/5 ">
+              <div className="flex flex-col grow">
+                    <TattoosOfTheFuture className="py-4 text-3xl">Tattoos of the future</TattoosOfTheFuture>
                     <FooterFont><div className="font-extrabold inline-block">Partnerships:</div><a className="inline-block px-2 font-grey underline" href='mailto:info@theorderofink.com?subject=Me&body=Hello!'>info@theorderofink.com</a></FooterFont>
                     
                     <FooterFont className="flex gap-x-4">
@@ -33,12 +34,17 @@ function FooterMobile() {
                         <a href="https://twitter.com/TheOrderofInk"><SocialIcon src={twitterlogo}/></a>
                     </FooterFont>
                     <FooterFont className="font-slate-400 underline py-8">&#9400; Copyright The Order of Ink 2022 - Website by JAX</FooterFont>
+                    <NavButton href="https://www.theorderofink.com/terms-conditions" className="text-zinc-50">Terms and Conditions</NavButton>
+                    <NavButton href="https://www.theorderofink.com/privacypolicy" className="text-zinc-50">Privacy Policy</NavButton>
+              </div>
+              <div className="flex flex-col">
                     <NavButton href="https://www.theorderofink.com/#ourvalues" className="flex items-start py-1">About</NavButton>
                     <NavButton className="flex items-start py-1" href="https://www.theorderofink.com/#collective">Collective</NavButton>
                     <NavButton href="https://www.theorderofink.com/#thinkmap" className="flex items-start py-1">Thinkmap</NavButton>
                     <NavButton href="https://www.theorderofink.com/#partners" className="flex items-start py-1">Partners</NavButton>
                     <NavButton href="https://www.theorderofink.com/#team" className="flex items-start py-1">Team</NavButton>
                     <NavButton href="https://www.theorderofink.com/faq" className="flex items-start py-1">FAQ</NavButton>
+              </div>
             </div>
         </div>
     )
@@ -66,7 +72,7 @@ const NavButton = styled.a`
 
 const TattoosOfTheFuture = styled.div`
 font-family: 'Alternate Gothic';
-font-size: 24px;
+
 
 font-style: normal;
 font-weight: 400;

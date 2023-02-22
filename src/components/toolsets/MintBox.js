@@ -7,6 +7,7 @@ import { getCombinedArtists } from '../utils/getCombinedArtists'
 import react, {useState, useEffect} from 'react'
 import { formatUnits } from 'ethers/lib/utils.js';
 import { getTotalPrice } from '../utils/getTotalPrice'
+import { saveAddress } from "@sharemint/sdk";
 
 import sessionOneKeys from '../../data/session_1_mintkeys.json'
 
@@ -65,6 +66,9 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
         onError(error) {
             console.log(error)
             setErrorMessage(error.message)
+        },
+        onSuccess(data){
+            saveAddress({ slug: "the-order-of-ink", transactionHash: data.hash });
         }
     })
 
@@ -137,24 +141,27 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             })}
                             </div>
                         </div>
-                        <br/>
+                        
                         <div className="flex justify-center col-span-2 pt-4">
-                            <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL</p>
+                            <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL: {firstSecondQuantity + thirdQuantity + free} NFTs</p>
                         </div>
                         <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
-                            <p>{formatUnits(mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity)), "ether")} ETH</p>
+                            <p>{formatUnits(mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity)), "ether")} ETH</p> 
                         </div>
-                        <br/>
-                        <div className="flex justify-center col-span-2 pt-8">
-                            {paused ? (<div className='text-zinc-50'>Minting is Currently Paused</div>) : (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)}
+                        <div className="flex justify-center col-span-2 pt-4">
+                            {paused ? 
+                                (<div className='text-zinc-50'>Minting is Currently Paused</div>) :
+                                selectedImages.length < 3 ? (<div className='text-zinc-50'>Please select 3+ Artists</div>) :
+                                (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
+                            }
                             {txStatus === "loading" && (
-                            <div className='text-zinc-50'>Your mint is loading! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                            <div className='text-zinc-50'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                             {txStatus === "error" && (
                                 <div className='text-zinc-50'>ERROR: {errorMessage}</div>
                             )}
                             {txStatus === "success" && (
-                                <div className='text-zinc-50'>SUCCESS! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                                <div className='text-zinc-50'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                         </div>
                         

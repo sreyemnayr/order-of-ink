@@ -21,7 +21,7 @@ function HeaderMobile() {
             
         </nav>
         <CustomConnectButton className="absolute flex justify-center inset-x-0 bottom-12 px-4 py-1" buttonClassName="w-1/2 text-base p-0 hover:ring-2 hover:ring-zinc-50"/>
-        <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0">Sneak Peek</SneakPeak>
+        <SneakPeak className="absolute flex justify-center inset-x-0 bottom-0">Sneak Peeks</SneakPeak>
         </HeaderContainer>
         {showNav && (
             <NavModal className="z-50 bg-black">

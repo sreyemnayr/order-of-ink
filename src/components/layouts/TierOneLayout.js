@@ -51,18 +51,18 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                 <div className="w-full md:w-2/3 px-2 mt-1 md:mt-0">
                     <div className={`bg-zinc-800 rounded-md ${firstSecondIncluded ? 'border border-zinc-50' : ''}`}> {/* SessionOneCard */}
                         <div className="flex p-2">
-                            <div className="w-1/2 flex flex-col justify-start px-1">
+                            <div className="w-1/2 flex flex-col justify-start px-1 mx-1">
                                 <img src={SessionOne}/>
                  
-                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Session One</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">First Session  </SessionText>
                                
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/15</SessionText>
                             </div>
-                            <div className="w-1/2 flex flex-col justify-start px-1">
+                            <div className="w-1/2 flex flex-col justify-start px-1 mx-1">
                                 
                                 <img src={SessionTwo}/>
                     
-                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Session Two</SessionText>
+                                <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl text-center">Second Session  </SessionText>
                                 
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/8</SessionText>
                                 
@@ -71,14 +71,19 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                         <div className="w-full flex flex-col justify-center text-zinc-50">
                             
                             <SessionSubText className={`flex justify-center mt-4 ${mintInfo?.session === 1 ? 'font-bold' : 'text-sm line-through text-zinc-400'}`}>Presale Price: 0.08 ETH</SessionSubText>
-                            <SessionSubText className={`flex justify-center ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.123 ETH</SessionSubText>
+                            <SessionSubText className={`flex justify-center mb-2 ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.123 ETH</SessionSubText>
                 
+                            {allowed > 0 ? (<SessionSubText className="flex justify-center py-0 text-xs text-amber-500">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<></>)}
+                            {free > 0 ? (<SessionSubText className="flex justify-center py-0 text-center italic text-xs text-amber-700">{free} Free NFTs will be minted in addition to the quantity selected</SessionSubText>) : (<></>)}
+
                             <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
+                            
+                            
                             <SessionSubText className="flex justify-center">
                                 <QuantitySelector quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity} free={free} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                             </SessionSubText>
                       
-                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${firstSecondIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
+                            <SessionButton onClick={() => setFirstSecondIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-t-md mt-4 ${firstSecondIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} firstSecondIncluded={firstSecondIncluded}>What's Included?</SessionButton>
                 
                         </div>
 
@@ -102,6 +107,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 </Line>
                                 <Line>Allowlist next artist collections</Line>
                                 <Line>Limited NFT Giveaways and airdrops</Line>
+                                
                 
                             </ul>
                             <br/>
@@ -110,6 +116,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <Line>
                                 Access to The Order private community for digital and IRL events
                                 </Line>
+                                <Line>Legal rights to negotiate with The Order of Ink and specific tattoo artist to get the physical tattoo or arrange for commercial rights</Line>
                             </ul>
                             
 
@@ -129,6 +136,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <Line>Discounted mint for next artist collections</Line>
                                 <Line>NFT giveaways and airdrops</Line>
                                 
+                                
                 
                             </ul>
                             <br/>
@@ -140,6 +148,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <Line>
                                 Access to The Order private community for digital and IRL events
                                 </Line>
+                                <Line>Legal rights to negotiate with The Order of Ink and specific tattoo artist to get the physical tattoo or arrange for commercial rights</Line>
                             </ul>
                             </div>
                             </div>}
@@ -160,15 +169,17 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/1</SessionText>
                                 <SessionSubText className={`flex justify-center mt-6 ${mintInfo?.session === 1 ? 'font-bold' : 'line-through text-zinc-400 text-sm'}`}>Presale Price: 0.4 ETH</SessionSubText>
                                 <SessionSubText className={`flex justify-center ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.5 ETH</SessionSubText>
+                                {allowed > 0 ? (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<></>)}
                                 <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}  allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                                 </SessionSubText>
-                                <SessionButton onClick={() => setThirdIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-md mt-4 ${thirdIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
+                                
                             </div>
                         </div>
-
-
+                        <div className="w-full flex flex-col justify-center text-zinc-50">
+                        <SessionButton onClick={() => setThirdIncluded(p => !p)} className={`text-lg sm:text-xl md:text-2xl flex justify-center py-3 rounded-t-md mt-4 ${thirdIncluded ? 'bg-neutral-500' : 'bg-zinc-800'}`} thirdIncluded={thirdIncluded}>What's Included?</SessionButton>
+                        </div>
 
 
 
@@ -177,29 +188,20 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                         <div className="flex justify-center w-full flex-wrap md:flex-nowrap bg-neutral-500">
                         <div className="w-full flex flex-col mx-4" style={{ wordWrap: "break-word", maxWidth: "308px"}}>
                             <ul style={{listStyleType: 'disc'}}>
-                                <Line>
-                                Genesis Collection Order of Ink digital collectible
-                                </Line>
-                                <Line>
-                                Genesis collectible artwork, hand drawn by an artist from our collective
-                                </Line>
-                                <Line>
-                                Exclusive access to all The Order of Ink future drops and artist collaborations
-                                </Line>
-                                <Line>Discounted mint for next artist collections</Line>
-                                <Line>NFT giveaways and airdrops</Line>
-                                
-                
+                            <Line>Genesis Collection Order of Ink digital collectible</Line>
+                            <Line>One of a kind super rare 1/1 artwork hand drawn by an artist from our collective</Line>
+                            <Line>Exclusive access to all The Order of Ink future drops and artist collaborations</Line>
+                            <Line>Free mint for future drops</Line>
+                            <Line>Private mint window for future drops</Line>
+                            <Line>NFT giveaways and airdrops</Line>
                             </ul>
                             <br/>
                             <div style={{color: "white", fontFamily: "Work Sans"}}>IRL:</div>
                             <ul style={{listStyleType: "disc"}}>
-                                <Line>
-                                Access to physical tattoo giveaways
-                                </Line>
-                                <Line>
-                                Access to The Order private community for digital and IRL events
-                                </Line>
+                            <Line>1/1 Physical Art Print</Line>
+                            <Line>Access to physical tattoo giveaways</Line>
+                            <Line>Access to The Order private community for digital and IRL events</Line>
+                            <Line>Legal rights to negotiate with The Order of Ink and specific tattoo artist to get the physical tattoo or arrange for commercial rights</Line>
                             </ul>
             
 
