@@ -154,6 +154,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                             {paused ? 
                                 (<div className='text-amber-500 text-center'>Minting is Currently Paused</div>) :
                                 selectedImages.length < 3 ? (<div className='text-amber-500'>Please select 3+ Artists </div>) :
+                                allowed < 1 ? (<div className='text-amber-500'>You have no allowed mints.</div>) :
                                 (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
                             }
                             {txStatus === "loading" && (
