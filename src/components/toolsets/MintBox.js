@@ -18,7 +18,7 @@ const contract = {
     abi: inkABI,
   }
 
-function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, free, allowed, mintInfo, packedChoices}) {
+function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, free, allowed, mintInfo, packedChoices, paused}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
     const { address, isConnected } = useAccount()
@@ -146,15 +146,15 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         </div>
                         <br/>
                         <div className="flex justify-center col-span-2 pt-8">
-                            <MintButton onClick={()=> {write?.()}}>Mint</MintButton>
+                            {paused ? (<div className='text-zinc-50'>Minting is Currently Paused</div>) : (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)}
                             {txStatus === "loading" && (
-                            <>Your mint is loading! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></>
+                            <div className='text-zinc-50'>Your mint is loading! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                             {txStatus === "error" && (
-                                <>ERROR: {errorMessage}</>
+                                <div className='text-zinc-50'>ERROR: {errorMessage}</div>
                             )}
                             {txStatus === "success" && (
-                                <>SUCCESS! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></>
+                                <div className='text-zinc-50'>SUCCESS! <a href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                         </div>
                         

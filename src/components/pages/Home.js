@@ -41,6 +41,7 @@ const Home = () => {
     const [freeMinted, setFreeMinted] = useState(0)
     const [allowed, setAllowed] = useState(0)
     const [free, setFree] = useState(0)
+    const [paused, setPaused] = useState(true)
     
 
     const { address, isConnected } = useAccount()
@@ -53,19 +54,24 @@ const Home = () => {
     const { data, isError, isLoading } = useContractReads({
     contracts: [
         {
-        ...contract,
-        functionName: 'mintInfo',
-        args: []
+            ...contract,
+            functionName: 'mintInfo',
+            args: []
         },
         {
-        ...contract,
-        functionName: 'balanceOf',
-        args: [address]
+            ...contract,
+            functionName: 'balanceOf',
+            args: [address]
         },
         {
-        ...contract,
-        functionName: 'getAux',
-        args: [address]
+            ...contract,
+            functionName: 'getAux',
+            args: [address]
+        },
+        {
+            ...contract,
+            functionName: 'paused',
+            args: []
         },
     ],
     enabled: isConnected,
@@ -80,13 +86,18 @@ const Home = () => {
             setMintInfo({goldRemaining: goldRemaining.toNumber(), blackRemaining: blackRemaining.toNumber(), goldPrice, blackPrice, session: session.toNumber()})
             setMinted(data?.[1] || 0)
             setFreeMinted(data?.[2] || 0)
+            setPaused(data?.[3] === false ? false : true)
         }
         
     }, [data])
 
     useEffect(() => {
+        console.log((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
+        console.log(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
+        console.log(sessionOneKeys?.[address?.toLowerCase()])
+        console.log(address)
         setFree((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
-        setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted || 0)
+        setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
     }, [address, freeMinted, minted])
 
     // Check to see if desktop or mobile
@@ -134,7 +145,7 @@ const Home = () => {
             <LargeContainer>
             <TierOneLayout free={free} allowed={allowed} mintInfo={mintInfo} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
             <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
-        <TierThreeLayout packedChoices={packedChoices} mintInfo={mintInfo} free={free} allowed={allowed} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
+        <TierThreeLayout paused={paused} packedChoices={packedChoices} mintInfo={mintInfo} free={free} allowed={allowed} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
         </LargeContainer>
         {responsive.showTopNavMenu ? <Footer/> : <FooterMobile/>}
     </PageLayout>
