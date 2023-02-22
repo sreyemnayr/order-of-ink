@@ -150,7 +150,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
                             <p>{formatUnits(mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity)), "ether")} ETH</p> 
                         </div>
-                        <div className="flex justify-center col-span-2 pt-4">
+                        <div className="flex flex-col justify-center col-span-2 pt-4">
                             {paused ? 
                                 (<div className='text-amber-500 text-center'>Minting is Currently Paused</div>) :
                                 selectedImages.length < 3 ? (<div className='text-amber-500'>Please select 3+ Artists </div>) :
@@ -158,13 +158,13 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                                 (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
                             }
                             {txStatus === "loading" && (
-                            <div className='text-amber-200'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                            <div className='text-amber-200'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                             {txStatus === "error" && (
                                 <div className='text-red-400'>ERROR: {errorMessage}</div>
                             )}
                             {txStatus === "success" && (
-                                <div className='text-amber-200'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                                <div className='text-amber-200'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`} className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">View on Etherscan</a></div>
                             )}
                         </div>
                         
