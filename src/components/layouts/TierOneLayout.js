@@ -73,7 +73,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                             <SessionSubText className={`flex justify-center mt-4 ${mintInfo?.session === 1 ? 'font-bold' : 'text-sm line-through text-zinc-400'}`}>Presale Price: 0.08 ETH</SessionSubText>
                             <SessionSubText className={`flex justify-center mb-2 ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.123 ETH</SessionSubText>
                 
-                            {allowed > 0 ? (<SessionSubText className="flex justify-center py-0 text-xs text-amber-500">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<></>)}
+                            {allowed >= 0 ? (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">Please connect a Web3 wallet</SessionSubText>)}
                             {free > 0 ? (<SessionSubText className="flex justify-center py-0 text-center italic text-xs text-amber-700">{free} Free NFTs will be minted in addition to the quantity selected</SessionSubText>) : (<></>)}
 
                             <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
@@ -169,7 +169,7 @@ function TierOneLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuanti
                                 <SessionText className="flex justify-center py-2 text-lg sm:text-xl md:text-4xl">1/1</SessionText>
                                 <SessionSubText className={`flex justify-center mt-6 ${mintInfo?.session === 1 ? 'font-bold' : 'line-through text-zinc-400 text-sm'}`}>Presale Price: 0.4 ETH</SessionSubText>
                                 <SessionSubText className={`flex justify-center ${mintInfo?.session > 1 ? 'font-bold' : 'text-sm text-zinc-400'}`}>Public Price: 0.5 ETH</SessionSubText>
-                                {allowed > 0 ? (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<></>)}
+                                {allowed >= 0 ? (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">A Total of {allowed} NFTs Can be minted from the connected wallet</SessionSubText>) : (<SessionSubText className="flex justify-center py-2 text-xs text-amber-500 text-center">Please connect a Web3 wallet</SessionSubText>)}
                                 <SessionSubText className="flex justify-center py-2">Quantity</SessionSubText>
                                 <SessionSubText className="flex justify-center">
                                     <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity}  allowed={allowed} total={firstSecondQuantity+thirdQuantity} />

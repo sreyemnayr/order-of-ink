@@ -101,7 +101,7 @@ const Home = () => {
             console.log(sessionOneKeys?.[address?.toLowerCase()])
             
             setFree((sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0) - freeMinted)
-            setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || -1)
+            setAllowed(sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[2] - minted - sessionOneKeys?.[address?.toLowerCase()]?.[1]?.[1] || 0)
         }
         
     }, [address, freeMinted, minted])

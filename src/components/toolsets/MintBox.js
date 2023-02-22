@@ -124,11 +124,11 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div className="flex justify-end">
                             <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                         </div>
-                        <div style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
-                            ARTISTS
+                        <div className="md:col-span-2" style={{fontSize: "26px", paddingLeft: "2rem", marginTop: "-5px"}}>
+                            ARTISTS {selectedImages.length < 3 ? (<div className='md:ml-2 md:inline text-amber-500'>Please select 3+ <button className="ring-1 rounded-md hover:bg-amber-500 hover:text-zinc-50 text-base leading-none p-1 ring-amber-500 " onClick={()=>{setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])}}>Surprise Me</button></div>) : (<></>)}
                         </div>
                         
-                        <div className="flex justify-center lg:col-span-2 w-full">
+                        <div className="flex justify-center md:col-span-2 w-full">
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 flex w-full gap-2 pl-[2rem]">
                             {combinedArtists.map((artist) => {
                                 return (
@@ -140,7 +140,9 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                                 )
                             })}
                             </div>
+                            
                         </div>
+
                         
                         <div className="flex justify-center col-span-2 pt-4">
                             <p style={{fontSize: "24px", fontFamily: "Work Sans", marginBottom: "10px"}}>TOTAL: {firstSecondQuantity + thirdQuantity + free} NFTs</p>
@@ -151,17 +153,17 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div className="flex justify-center col-span-2 pt-4">
                             {paused ? 
                                 (<div className='text-zinc-50'>Minting is Currently Paused</div>) :
-                                selectedImages.length < 3 ? (<div className='text-zinc-50'>Please select 3+ Artists</div>) :
+                                selectedImages.length < 3 ? (<div className='text-amber-500'>Please select 3+ Artists </div>) :
                                 (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
                             }
                             {txStatus === "loading" && (
-                            <div className='text-zinc-50'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                            <div className='text-amber-200'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                             {txStatus === "error" && (
-                                <div className='text-zinc-50'>ERROR: {errorMessage}</div>
+                                <div className='text-red-400'>ERROR: {errorMessage}</div>
                             )}
                             {txStatus === "success" && (
-                                <div className='text-zinc-50'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                                <div className='text-amber-200'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
                         </div>
                         
