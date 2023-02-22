@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Modal } from './Modal';
 
 // Data
-const data = [131,169,152,154,256,204,348,328,159,195,202,120,267,251,257,11,23,319,189,164,341,321,137,424,66,170,50,63,279]
+const data = [131,169,152,154,256,204,348,328,159,195,202,120,267,251,250,11,23,319,189,164,341,321,137,424,66,170,50,63,279]
 
 export const Carousel = () => {
   const maxScrollWidth = useRef(0);
