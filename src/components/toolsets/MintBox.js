@@ -19,7 +19,7 @@ const contract = {
     abi: inkABI,
   }
 
-function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, free, allowed, mintInfo, packedChoices, paused}) {
+function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, free, allowed, mintInfo, packedChoices, paused, refetch}) {
 
     const [combinedArtists, setCombinedArtists] = useState([])
     const { address, isConnected } = useAccount()
@@ -69,6 +69,7 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
         },
         onSuccess(data){
             saveAddress({ slug: "the-order-of-ink", transactionHash: data.hash });
+            refetch?.()
         }
     })
 

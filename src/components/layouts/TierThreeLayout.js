@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import MintBoxMobile from '../toolsets/MintBoxMobile'
 
 
-function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, selectedImages, setSelectedImages, free, allowed, mintInfo, packedChoices, paused}) {
+function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuantity, setThirdQuantity, selectedImages, setSelectedImages, free, allowed, mintInfo, packedChoices, paused, refetch}) {
 
     return (
         <>
@@ -22,7 +22,7 @@ function TierThreeLayout({firstSecondQuantity, setFirstSecondQuantity, thirdQuan
                 </BookYourSessionCol>
             </Row>
             <br/>
-            <MintBox packedChoices={packedChoices} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} free={free} allowed={allowed} mintInfo={mintInfo} paused={paused} />
+            <MintBox packedChoices={packedChoices} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity} free={free} allowed={allowed} mintInfo={mintInfo} paused={paused} refetch={refetch} />
             
             {/*(responsive) ? (
                 <MintBox selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>

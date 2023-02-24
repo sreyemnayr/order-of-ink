@@ -53,7 +53,7 @@ const Home = () => {
         abi: inkABI,
       }
     
-    const { data, isError, isLoading } = useContractReads({
+    const { data, isError, isLoading, refetch } = useContractReads({
     contracts: [
         {
             ...contract,
@@ -79,6 +79,22 @@ const Home = () => {
     enabled: isConnected,
     })
 
+    const { data: genericData, isError: genericIsError, isLoading: genericIsLoading } = useContractReads({
+        contracts: [
+            {
+                ...contract,
+                functionName: 'mintInfo',
+                args: []
+            },
+            {
+                ...contract,
+                functionName: 'paused',
+                args: []
+            },
+        ],
+        enabled: true,
+        })
+
     
 
     useEffect(()=>{
@@ -92,6 +108,17 @@ const Home = () => {
         }
         
     }, [data])
+
+    useEffect(()=>{
+        if(genericData){
+            console.log(genericData)
+            const [goldRemaining, blackRemaining, goldPrice, blackPrice, session] = genericData?.[0] || {goldRemaining: 0, blackRemaining: 0, goldPrice: 0.5, blackPrice: 0.5, session:1}
+            setMintInfo({goldRemaining: goldRemaining.toNumber(), blackRemaining: blackRemaining.toNumber(), goldPrice, blackPrice, session: session.toNumber()})
+            
+            setPaused(genericData?.[1] === false ? false : true)
+        }
+        
+    }, [genericData])
 
     useEffect(() => {
         if(address){
@@ -153,7 +180,7 @@ const Home = () => {
             <LargeContainer>
             <TierOneLayout free={free} allowed={allowed} mintInfo={mintInfo} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
             <TierTwoLayout selectedImages={selectedImages} setSelectedImages={setSelectedImages} soldOutImages={soldOutImages}/>
-        <TierThreeLayout paused={paused} packedChoices={packedChoices} mintInfo={mintInfo} free={free} allowed={allowed} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
+        <TierThreeLayout refetch={refetch} paused={paused} packedChoices={packedChoices} mintInfo={mintInfo} free={free} allowed={allowed} selectedImages={selectedImages} setSelectedImages={setSelectedImages} firstSecondQuantity={firstSecondQuantity} setFirstSecondQuantity={setFirstSecondQuantity} thirdQuantity={thirdQuantity} setThirdQuantity={setThirdQuantity}/>
         </LargeContainer>
         <FooterMobile/> 
     </PageLayout>
