@@ -8,6 +8,7 @@ import react, {useState, useEffect} from 'react'
 import { formatUnits } from 'ethers/lib/utils.js';
 import { getTotalPrice } from '../utils/getTotalPrice'
 import { saveAddress } from "@sharemint/sdk";
+import { CustomConnectButton } from '../toolsets/CustomConnectWalletButton'
 
 import sessionOneKeys from '../../data/session_1_mintkeys.json'
 
@@ -37,6 +38,16 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
         ],
         overrides: {
             value: mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity))
+        },
+        onError(error) {
+            console.log("ERRORING")
+            console.log(error)
+            setErrorMessage(error.code)
+        },
+        onSuccess(d) {
+            console.log("SUCCESSING")
+            console.log(d)
+            setErrorMessage("")
         }
     })
 
@@ -57,6 +68,8 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
             setTxHash(data.hash)
         },
         onError(error) {
+            console.log("ERRORING")
+            console.log(error)
             setErrorMessage(error.message)
         }
     })
@@ -111,22 +124,22 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div style={{fontSize: "48px"}} className="flex justify-center col-span-2">
                             Mint Details
                         </div>
-                        <div className="col-span-2 md:col-span-1" style={{fontSize: "26px", marginTop: "-5px"}}>
-                            FIRST/SECOND SESSION
+                        <div className={`col-span-2 md:col-span-1 ${(firstSecondQuantity + thirdQuantity + free) < 1 ? 'text-amber-500': ''}`} style={{fontSize: "26px", marginTop: "-5px"}}>
+                            FIRST/SECOND SESSION 
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.blackPrice, "ether")} ETH</p>
                         </div>
                         <div className="col-span-2 md:col-span-1 flex justify-end">
                             <QuantitySelector free={free} quantity={firstSecondQuantity} setQuantity={setFirstSecondQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity}  />
                         </div>
-                        <div className="col-span-2 md:col-span-1" style={{fontSize: "26px", marginTop: "-5px"}}>
+                        <div className={`col-span-2 md:col-span-1 ${(firstSecondQuantity + thirdQuantity + free) < 1 ? 'text-amber-500': ''}`} style={{fontSize: "26px", marginTop: "-5px"}}>
                             FINAL SESSION
                             <p style={{fontSize: "14px", fontFamily: "Work Sans", marginTop: "-15px"}}>{formatUnits(mintInfo.goldPrice, "ether")} ETH</p>
                         </div>
                         <div className="col-span-2 md:col-span-1 flex justify-end">
                             <QuantitySelector quantity={thirdQuantity} setQuantity={setThirdQuantity} allowed={allowed} total={firstSecondQuantity+thirdQuantity} />
                         </div>
-                        <div className="col-span-2" style={{fontSize: "26px", marginTop: "-5px"}}>
-                            ARTISTS {selectedImages.length < 3 ? (<div className='md:ml-2 md:inline text-amber-500'>Please select 3+ <button className="ring-1 rounded-md hover:bg-amber-500 hover:text-zinc-50 text-base leading-none p-1 ring-amber-500 " onClick={()=>{setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])}}>Surprise Me</button></div>) : (<></>)}
+                        <div className={`col-span-2 ${selectedImages.length < 3 ? 'text-amber-500': ''}`} style={{fontSize: "26px", marginTop: "-5px"}}>
+                            ARTISTS {selectedImages.length < 3 ? (<div className='md:ml-2 md:inline text-amber-500 text-sm'>Please select {3 - selectedImages.length} more <button className="ring-1 rounded-md hover:bg-amber-500 hover:text-zinc-50 text-base leading-none p-1 ring-amber-500 ml-2 " onClick={()=>{setSelectedImages([0,1,2,3,4,5,6,7,8,9,10,11,12,13])}}>Surprise Me</button></div>) : (<></>)}
                         </div>
                         
                         <div className="flex justify-center col-span-2 w-full">
@@ -151,21 +164,23 @@ function MintBox({selectedImages, setSelectedImages, firstSecondQuantity, setFir
                         <div style={{fontSize: "64px"}} className="flex justify-center col-span-2">
                             <p>{formatUnits(mintInfo.blackPrice.mul(firstSecondQuantity).add(mintInfo.goldPrice.mul(thirdQuantity)), "ether")} ETH</p> 
                         </div>
-                        <div className="flex flex-col justify-center col-span-2 pt-4">
+                        <div className="flex flex-col justify-center col-span-2 pt-4 text-center">
                             {paused ? 
                                 (<div className='text-amber-500 text-center'>Minting is Currently Paused</div>) :
                                 selectedImages.length < 3 ? (<div className='text-amber-500'>Please select 3+ Artists </div>) :
+                                !isConnected ? (<CustomConnectButton /> ) :
                                 allowed < 1 ? (<div className='text-amber-500'>You have no allowed mints.</div>) :
-                                (<MintButton onClick={()=> {write?.()}}>Mint</MintButton>)
+                                (firstSecondQuantity + thirdQuantity + free) < 1 ? (<div className='text-amber-500'>You have not selected any NFTs to mint.</div>): 
+                                (<MintButton className="mx-auto" onClick={()=> {write?.()}}>Mint</MintButton>)
                             }
                             {txStatus === "loading" && (
-                            <div className='text-amber-200'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
+                            <div className='text-amber-200 text-center'>Your mint is awaiting verification! <a target="_blank" rel="noreferrer" className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400" href={`https://etherscan.io/tx/${txHash}`}>View on Etherscan</a></div>
                             )}
-                            {txStatus === "error" && (
-                                <div className='text-red-400'>ERROR: {errorMessage}</div>
+                            {errorMessage !== "" && (
+                                <div className='text-red-400 text-center'>ERROR: {errorMessage}</div>
                             )}
                             {txStatus === "success" && (
-                                <div className='text-amber-200'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`} className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">View on Etherscan</a></div>
+                                <div className='text-amber-200 text-center'>SUCCESS! <a target="_blank" rel="noreferrer" href={`https://etherscan.io/tx/${txHash}`} className="mx-1 underline underline-offset-2 decoration-dashed decoration-amber-200 text-amber-100 hover:text-amber-400">View on Etherscan</a></div>
                             )}
                         </div>
                         
