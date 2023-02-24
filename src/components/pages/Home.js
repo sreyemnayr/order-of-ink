@@ -43,7 +43,7 @@ const Home = () => {
     const [freeMinted, setFreeMinted] = useState(0)
     const [allowed, setAllowed] = useState(-1)
     const [free, setFree] = useState(0)
-    const [paused, setPaused] = useState(true)
+    const [paused, setPaused] = useState(false)
     
 
     const { address, isConnected } = useAccount()

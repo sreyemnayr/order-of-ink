@@ -43,9 +43,7 @@ import default_14 from '../../images/14_default.png'
 import selected_14 from '../../images/14_selected.png'
 
 export const getCombinedArtists = () => {
-    const Artists = ['AMAIA','ANINHA','ARCHITEX','BRADLEY',
-    'ESTEBAN','FABIO','FLOR','JOHANNA','KATUSZA','MERRY',
-    'NEAT ART','SZYMON','VULZ','YAIZA']
+    const Artists = ['AMAIA','ANINHA','ARCHITEX','BRADLEY', 'ESTEBAN','FABIO','FLOR','JOHANNA','KATUSZA','MERRY', 'NEAT ART','SZYMON','VULZ','YAIZA']
 
     const hover_images = ['hover:bg-artist-hover-1', 'hover:bg-artist-hover-2', 'hover:bg-artist-hover-3', 'hover:bg-artist-hover-4', 'hover:bg-artist-hover-5', 'hover:bg-artist-hover-6', 'hover:bg-artist-hover-7', 'hover:bg-artist-hover-8', 'hover:bg-artist-hover-9', 'hover:bg-artist-hover-10', 'hover:bg-artist-hover-11', 'hover:bg-artist-hover-12', 'hover:bg-artist-hover-13', 'hover:bg-artist-hover-14']
     const selected_images = ['bg-artist-selected-1', 'bg-artist-selected-2', 'bg-artist-selected-3', 'bg-artist-selected-4', 'bg-artist-selected-5', 'bg-artist-selected-6', 'bg-artist-selected-7', 'bg-artist-selected-8', 'bg-artist-selected-9', 'bg-artist-selected-10', 'bg-artist-selected-11', 'bg-artist-selected-12', 'bg-artist-selected-13', 'bg-artist-selected-14']
